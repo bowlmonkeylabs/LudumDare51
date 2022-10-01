@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 63f8b7ae52c149039fe18c76d3d3b56d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _onMinigameCompleted: {fileID: 11400000, guid: 540c844c5f46f79459b7d3ee1af5da21, type: 2}
+  - _onMinigameFailed: {fileID: 11400000, guid: 47485cd65bb53554aa5384ab0dc843a8, type: 2}
+  - _minigameTaskContainer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
