@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/RaycastTestAdditive.unity
+    guid: 518cd6798a0414e4b9ac2833500a5279
   m_configObjects: {}
