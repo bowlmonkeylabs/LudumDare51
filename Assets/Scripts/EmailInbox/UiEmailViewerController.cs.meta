@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 56b6512da8aa456782eba96fdbf7ad74
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _onOpenEmail: {fileID: 11400000, guid: 112cdc88628f78b47a701758cfacfbd6, type: 2}
+  - _emailData: {instanceID: 0}
+  - _textFromAddress: {instanceID: 0}
+  - _textSubject: {instanceID: 0}
+  - _textBody: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
