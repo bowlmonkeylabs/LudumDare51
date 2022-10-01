@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BML.ScriptableObjectCore.Scripts.SceneReferences;
+using BML.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -9,19 +10,12 @@ namespace BML.Scripts
 {
     public class RaycastRenderTexture : MonoBehaviour
     {
-        [SerializeField] private string _hitTag = "";
-        [SerializeField] private RectTransform _minigameScreenRect;
+        [SerializeField] private LayerMask _hitMask;
+        [SerializeField] private RectTransform _minigameRect;
         [SerializeField] private RectTransform _parentCanvasRect;
-        [SerializeField] private CameraSceneReference _mainCamera;
         [SerializeField] private CameraSceneReference _minigameCamera;
 
-        private GameObject _minigameScreenObj;
         private Ray ray;
-
-        private void OnEnable()
-        {
-            _minigameScreenObj = _minigameScreenRect.gameObject;
-        }
 
         private void OnDrawGizmos()
         {
@@ -30,44 +24,47 @@ namespace BML.Scripts
 
         public void OnClick()
         {
-            Debug.Log("Clicked");
+            TryRaycastIntoMinigame();
+        }
 
+        private void TryRaycastIntoMinigame()
+        {
             Vector3 mousePos = Mouse.current.position.ReadValue();
             RaycastResult uiRaycast = UIRaycast(ScreenPosToPointerData(mousePos));
-            if (uiRaycast.gameObject != null)
+
+            if (uiRaycast.gameObject == null)
+                return;
+            
+            float realWidth = _minigameRect.sizeDelta.x * _parentCanvasRect.localScale.x;
+            float realHeight = _minigameRect.sizeDelta.y * _parentCanvasRect.localScale.y;
+
+            Bounds minigameScreenBounds = new Bounds();
+            minigameScreenBounds.center = _minigameRect.position;
+            minigameScreenBounds.size =
+                new Vector3(realWidth, realHeight);
+
+            if (!minigameScreenBounds.Contains(mousePos))
+                return;
+            
+            Vector2 minigameScreenToMouseDelta = mousePos - _minigameRect.position;
+            
+            Vector2 minigameScreenCoord = new Vector2(
+                (minigameScreenToMouseDelta.x + realWidth/2f) / realWidth,
+                (minigameScreenToMouseDelta.y + realHeight/2f) / realHeight);
+            
+            ray = _minigameCamera.Value.ViewportPointToRay(new Vector3(minigameScreenCoord.x, minigameScreenCoord.y));
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+            if (hit.collider != null)
             {
-                float minigameScreenRealWidth = _minigameScreenRect.sizeDelta.x * _parentCanvasRect.localScale.x;
-                float minigameScreenRealHeight = _minigameScreenRect.sizeDelta.y * _parentCanvasRect.localScale.y;
-                
-                Debug.Log($"hitUI: {uiRaycast.gameObject.name} | hitPos: {uiRaycast.screenPosition} | mousePos: {mousePos}");
-                Debug.Log($"Rect screen pos: {_minigameScreenRect.position} | Center: {_minigameScreenRect.rect.center} | Width: {minigameScreenRealWidth} | Height: {minigameScreenRealHeight}");
-
-                Bounds minigameScreenBounds = new Bounds();
-                minigameScreenBounds.center = _minigameScreenRect.position;
-                minigameScreenBounds.size =
-                    new Vector3(minigameScreenRealWidth, minigameScreenRealHeight);
-
-                Debug.Log($"Contains Mouse: {minigameScreenBounds.Contains(mousePos)}");
-
-                Vector2 minigameScreenToMouseDelta = mousePos - _minigameScreenRect.position;
-                Debug.Log($"Delta {minigameScreenToMouseDelta}");
-                
-                Vector2 minigameScreenCoord = new Vector2(
-                    (minigameScreenToMouseDelta.x + minigameScreenRealWidth/2f) / minigameScreenRealWidth,
-                    (minigameScreenToMouseDelta.y + minigameScreenRealHeight/2f) / minigameScreenRealHeight);
-                
-                Debug.Log($"Coord {minigameScreenCoord}");
-
-                if (minigameScreenBounds.Contains(mousePos))
+                GameObject hitObj = hit.collider.gameObject;
+                Debug.Log($"Hit object in additive scene: {hitObj.name}");
+                if (hitObj.IsInLayerMask(_hitMask))
                 {
-                    ray = _minigameCamera.Value.ViewportPointToRay(new Vector3(minigameScreenCoord.x, minigameScreenCoord.y));
-                    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-                    if (hit.collider != null)
-                    {
-                        Debug.Log($"Hit object in additive scene: {hit.collider.gameObject.name}");
-                    }
+                    Debug.Log("Hit object belongs to hit layermask");
                 }
             }
+            
+            
         }
 
         static RaycastResult UIRaycast (PointerEventData pointerData)
