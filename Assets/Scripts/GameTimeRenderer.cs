@@ -13,17 +13,20 @@ namespace BML.Scripts {
 
         private float _timerStep;
 
-        void OnEnable() {
+        void OnEnable() 
+        {
             _timerStep = EIGHT_HOURS_IN_SECONDS / _gameTimer.Duration;
 
             _gameTimer.Subscribe(UpdateText);
         }
 
-        void OnDisable() {
+        void OnDisable() 
+        {
             _gameTimer.Unsubscribe(UpdateText);
         }
 
-        private void UpdateText() {
+        private void UpdateText() 
+        {
             var time = (int)(_gameTimer.ElapsedTime * 48);
             var hours = time / 60 / 60;
             var minutes = time / 60;
