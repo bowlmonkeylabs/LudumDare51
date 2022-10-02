@@ -1,10 +1,14 @@
 fileFormatVersion: 2
-guid: 1474480e132438040917b363037e368a
+guid: 7c9224a18647413a993cda92b171391e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - _minigameRect: {instanceID: 0}
+  - _parentCanvasRect: {instanceID: 0}
+  - _minigameCamera: {fileID: 11400000, guid: abf4c2f9432e26845ae560907ae98400, type: 2}
   - _mouseWorldPosInMinigame: {fileID: 11400000, guid: 0761dfe7e76ebed43881bf23a9986cf9, type: 2}
+  - _onCancelDrag: {fileID: 11400000, guid: 6e2ff0944ad380d469f5a0ad241f46be, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

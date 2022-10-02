@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using BML.ScriptableObjectCore.Scripts.Events;
 using BML.ScriptableObjectCore.Scripts.SceneReferences;
+using BML.ScriptableObjectCore.Scripts.Variables;
 using BML.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,32 +10,100 @@ using UnityEngine.InputSystem;
 
 namespace BML.Scripts
 {
-    public class RaycastRenderTexture : MonoBehaviour
+    public class ProcessMinigameInput : MonoBehaviour
     {
         [SerializeField] private LayerMask _hitMask;
         [SerializeField] private RectTransform _minigameRect;
         [SerializeField] private RectTransform _parentCanvasRect;
         [SerializeField] private CameraSceneReference _minigameCamera;
-
+        [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;
+        [SerializeField] private GameEvent _onCancelDrag;
+        private bool IsMinigameRunning => _minigameCamera.Value != null;
+        
+        private bool _dragging;
         private Ray ray;
+
+        #region Unity Lifecycle
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawLine(ray.origin, ray.direction * 15f);
         }
 
-        public void OnClick()
+        private void Update()
         {
-            TryRaycastIntoMinigame();
+            if (_minigameCamera.Value == null)
+                return;
+            
+            Vector3 mousePos = Mouse.current.position.ReadValue();
+
+            float realWidth = _minigameRect.sizeDelta.x * _parentCanvasRect.localScale.x;
+            float realHeight = _minigameRect.sizeDelta.y * _parentCanvasRect.localScale.y;
+            
+            Vector2 minigameScreenToMouseDelta = mousePos - _minigameRect.position;
+            
+            Vector2 minigameScreenCoord = new Vector2(
+                (minigameScreenToMouseDelta.x + realWidth/2f) / realWidth,
+                (minigameScreenToMouseDelta.y + realHeight/2f) / realHeight);
+
+            _mouseWorldPosInMinigame.Value = _minigameCamera.Value.ViewportToWorldPoint(minigameScreenCoord);
         }
 
-        private void TryRaycastIntoMinigame()
+        #endregion
+
+        #region Input Callbacks
+
+        public void OnClick(InputAction.CallbackContext context)
+        {
+            if (!IsMinigameRunning)
+                return;
+            
+            if (context.performed)
+            {
+                GameObject hitObj = TryRaycastIntoMinigame();
+                if (hitObj == null)
+                    return;
+            
+                Clickable clickable = hitObj.GetComponent<Clickable>();
+                if(clickable != null) {
+                    clickable.EmitClick();
+                }
+            }
+        }
+        
+        public void OnDrag(InputAction.CallbackContext context) {
+            if (!IsMinigameRunning)
+                return;
+            
+            if(context.performed) {
+                _dragging = true;
+                
+                GameObject hitObj = TryRaycastIntoMinigame();
+                if (hitObj == null)
+                    return;
+                
+                Draggable draggable = hitObj.GetComponent<Draggable>();
+                if(draggable != null) {
+                    draggable.StartDrag();
+                }
+                
+            }
+            if(_dragging && context.canceled) {
+                _dragging = false;
+                
+                _onCancelDrag.Raise();
+            }
+        }
+
+        #endregion
+
+        private GameObject TryRaycastIntoMinigame()
         {
             Vector3 mousePos = Mouse.current.position.ReadValue();
             RaycastResult uiRaycast = UIRaycast(ScreenPosToPointerData(mousePos));
 
             if (uiRaycast.gameObject == null)
-                return;
+                return null;
             
             float realWidth = _minigameRect.sizeDelta.x * _parentCanvasRect.localScale.x;
             float realHeight = _minigameRect.sizeDelta.y * _parentCanvasRect.localScale.y;
@@ -44,7 +114,7 @@ namespace BML.Scripts
                 new Vector3(realWidth, realHeight);
 
             if (!minigameScreenBounds.Contains(mousePos))
-                return;
+                return null;
             
             Vector2 minigameScreenToMouseDelta = mousePos - _minigameRect.position;
             
@@ -61,10 +131,11 @@ namespace BML.Scripts
                 if (hitObj.IsInLayerMask(_hitMask))
                 {
                     Debug.Log("Hit object belongs to hit layermask");
+                    return hitObj;
                 }
             }
-            
-            
+
+            return null;
         }
 
         static RaycastResult UIRaycast (PointerEventData pointerData)

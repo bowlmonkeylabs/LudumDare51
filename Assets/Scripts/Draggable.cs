@@ -1,3 +1,6 @@
+using System;
+using BML.ScriptableObjectCore.Scripts.Events;
+using BML.ScriptableObjectCore.Scripts.Variables;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,10 +12,22 @@ namespace BML.Scripts {
         [SerializeField] private LayerMask _droppableLayerMask;
         [SerializeField] private UnityEvent _onStartDrag;
         [SerializeField] private UnityEvent _onEndDrag;
+        [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;
+        [SerializeField] private GameEvent _onCancelDrag;
 
         private bool _dragging = false;
         private Vector3 _dragOffset;
         private Vector3 _dragStart;
+
+        private void OnEnable()
+        {
+            _onCancelDrag.Subscribe(EndDrag);
+        }
+
+        private void OnDisable()
+        {
+            _onCancelDrag.Unsubscribe(EndDrag);
+        }
 
         public void StartDrag() {
             _dragOffset = transform.position - getMouseWorldPositionOnTransformLevel();
@@ -23,12 +38,15 @@ namespace BML.Scripts {
             _onStartDrag.Invoke();
         }
 
-        public void EndDrag() {
+        public void EndDrag()
+        {
+            if (!_dragging)
+                return;
+            
             _dragging = false;
             _onEndDrag.Invoke();
 
-            Ray clickRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit2D raycastHit = Physics2D.Raycast(clickRay.origin, clickRay.direction, Mathf.Infinity, _droppableLayerMask);
+            RaycastHit2D raycastHit = Physics2D.Raycast(_mouseWorldPosInMinigame.Value, Vector3.forward, Mathf.Infinity, _droppableLayerMask);
             
             Droppable droppable = raycastHit ? raycastHit.transform.GetComponent<Droppable>() : null;
             if(droppable != null) {
@@ -44,8 +62,9 @@ namespace BML.Scripts {
             }
         }
 
-        private Vector3 getMouseWorldPositionOnTransformLevel() {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        private Vector3 getMouseWorldPositionOnTransformLevel()
+        {
+            Vector3 pos = _mouseWorldPosInMinigame.Value;
             pos.z = transform.position.z;
             return pos;
         }

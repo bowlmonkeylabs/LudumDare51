@@ -3,7 +3,9 @@ guid: 88083563f08c0b149a76428b9bfd6a4f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _mouseWorldPosInMinigame: {fileID: 11400000, guid: 0761dfe7e76ebed43881bf23a9986cf9, type: 2}
+  - _onCancelDrag: {fileID: 11400000, guid: 6e2ff0944ad380d469f5a0ad241f46be, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
