@@ -34,7 +34,7 @@ namespace BML.Scripts
 
         #region Unity Lifecycle
 
-        private void Awake()
+        private void Start()
         {
             StartMinigame();
         }

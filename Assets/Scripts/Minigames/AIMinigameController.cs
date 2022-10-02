@@ -23,7 +23,7 @@ namespace BML.Scripts
 
         #region Unity lifecycle
         
-        private void Start()
+        private void Awake()
         {
             InitializeGame();
         }
@@ -40,8 +40,8 @@ namespace BML.Scripts
         private void InitializeGame()
         {
             // Pick a random prompt and set of images
-            int randomPrefixIndex = Random.Range(0, _minigamePresets.Count - 1);
-            AiMinigamePreset randomPreset = _minigamePresets[randomPrefixIndex];
+            int randomPresetIndex = Random.Range(0, _minigamePresets.Count - 1);
+            AiMinigamePreset randomPreset = _minigamePresets[randomPresetIndex];
 
             // Set task text
             _task._taskText = randomPreset.Prompt;
