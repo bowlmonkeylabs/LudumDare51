@@ -18,6 +18,11 @@ namespace BML.Scripts
                 _onIsNotCurrentTask.Invoke();
         }
 
+        public void TryRaiseSuccessVoid()
+        {
+            TryRaiseSuccess();
+        }
+
         public bool TryRaiseSuccess()
         {
             if (_task.isCurrentTask)
