@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BML.Scripts.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -10,33 +11,21 @@ namespace BML.Scripts
 {
     public class AIMinigameController : MonoBehaviour
     {
+        #region Inspector
+        
         [SerializeField] private MinigameTask _task;
-        [SerializeField] private List<SpriteRenderer> _imageOptions = new List<SpriteRenderer>();
+        [FormerlySerializedAs("_imageOptions")] [SerializeField] private List<SpriteRenderer> _imageRenderers = new List<SpriteRenderer>();
         [SerializeField] private List<AiMinigamePreset> _minigamePresets = new List<AiMinigamePreset>();
 
+        #endregion
+        
         private Clickable correctClickable;
 
+        #region Unity lifecycle
+        
         private void Start()
         {
-            int randomPrefixIndex = Random.Range(0, _minigamePresets.Count - 1);
-            AiMinigamePreset randomPreset = _minigamePresets[randomPrefixIndex];
-
-            _task._taskText = randomPreset.Prompt;
-            
-            int randomButtonIndex = Random.Range(0, _minigamePresets.Count - 1);
-            _imageOptions[randomButtonIndex].sprite = randomPreset.CorrectImage;
-            
-            correctClickable = _imageOptions[randomButtonIndex].GetComponent<Clickable>();
-            correctClickable.SubscribeOnClick(WinMinigame);
-
-            List<SpriteRenderer> remainingOptionsList = _imageOptions;
-            remainingOptionsList.Remove(_imageOptions[randomButtonIndex]);
-            
-            //Assuming 3 images in the list...
-            remainingOptionsList[0].sprite = randomPreset.WrongImages[0];
-            remainingOptionsList[1].sprite = randomPreset.WrongImages[1];
-
-
+            InitializeGame();
         }
 
         private void OnDisable()
@@ -44,9 +33,41 @@ namespace BML.Scripts
             correctClickable.UnSubscribeOnClick(WinMinigame);
         }
 
+        #endregion
+        
+        #region Game
+
+        private void InitializeGame()
+        {
+            // Pick a random prompt and set of images
+            int randomPrefixIndex = Random.Range(0, _minigamePresets.Count - 1);
+            AiMinigamePreset randomPreset = _minigamePresets[randomPrefixIndex];
+
+            // Set task text
+            _task._taskText = randomPreset.Prompt;
+            
+            // Randomly choose where the "correct" image is located
+            int correctButtonIndex = Random.Range(0, _imageRenderers.Count);
+            _imageRenderers[correctButtonIndex].sprite = randomPreset.CorrectImage;
+            correctClickable = _imageRenderers[correctButtonIndex].GetComponent<Clickable>();
+            correctClickable.SubscribeOnClick(WinMinigame);
+
+            // Assign the "incorrect" images to the remaining slots
+            List<SpriteRenderer> remainingOptionsList = _imageRenderers
+                .Where(ir => ir != _imageRenderers[correctButtonIndex])
+                .OrderBy(ir => Random.value)
+                .ToList();
+            //Assuming 3 images in the list...
+            remainingOptionsList[0].sprite = randomPreset.WrongImages[0];
+            remainingOptionsList[1].sprite = randomPreset.WrongImages[1];
+        }
+        
         private void WinMinigame()
         {
             _task.InvokeOnSuccess();
         }
+        
+        #endregion
+        
     }
 }
