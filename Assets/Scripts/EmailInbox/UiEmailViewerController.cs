@@ -75,7 +75,7 @@ namespace EmailInbox
         {
             if (_emailData != null)
             {
-                CloseEmail(false);
+                CloseEmail(_lastMinigameSuccess.Value);
             }
             
             _emailData = emailInstanceData;
@@ -83,7 +83,7 @@ namespace EmailInbox
             RenderEmailData();
         }
         
-        public void CloseEmail(bool removeFromInbox = true)
+        public void CloseEmail(bool removeFromInbox)
         {
             CloseMinigame();
             
@@ -118,7 +118,7 @@ namespace EmailInbox
             if (_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyAcceptSpam?.Invoke();
-                CloseEmail();
+                CloseEmail(true);
                 return;
             }
             
@@ -135,12 +135,12 @@ namespace EmailInbox
             if (!_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyRejectTask?.Invoke();
-                CloseEmail();
+                CloseEmail(true);
                 return;
             }
             
             _onSuccessRejectSpam?.Invoke();
-            CloseEmail();
+            CloseEmail(true);
         }
 
         #endregion

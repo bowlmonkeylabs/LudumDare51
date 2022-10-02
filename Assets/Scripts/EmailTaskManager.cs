@@ -9,6 +9,7 @@ using System.Collections.Generic;
 namespace BML.Scripts {
     public class EmailTaskManager : MonoBehaviour
     {
+        [SerializeField] private bool _initialDelay = false;
         [SerializeField] private TimerVariable _emailTimer;
         [SerializeField] private TimerVariable _gameTimer;
         [Required, SerializeField] private EmailInboxState _inboxState;
@@ -33,6 +34,10 @@ namespace BML.Scripts {
         }
 
         void OnEnable() {
+            if (!_initialDelay)
+            {
+                OnEmailTimerFinished();
+            }
             _emailTimer.SubscribeFinished(OnEmailTimerFinished);
 
             _emailTimer.StartTimer();
