@@ -20,4 +20,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AIPicture_Minigame.unity
     guid: a8c21806bd6dee044849320fbf0bf4b2
+  - enabled: 1
+    path: Assets/Scenes/Gardening_Minigame.unity
+    guid: f3c686cfd0c0ef346a36bf8f4bc2fd7b
+  - enabled: 1
+    path: Assets/Scenes/BrushTeeth_Minigame.unity
+    guid: fb2d2dfc96f484e4e9a955950f0a4672
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: c5dbec2bfae5b9246887f87274f3f3e2
+  - enabled: 1
+    path: Assets/Scenes/StrikesLoseScene.unity
+    guid: 3ba757fc261bdbe43a9e3e9ed5d44923
+  - enabled: 1
+    path: Assets/Scenes/InboxLoseScreen.unity
+    guid: ccaa11c675eb5154f87ebb62c54f8b5d
   m_configObjects: {}

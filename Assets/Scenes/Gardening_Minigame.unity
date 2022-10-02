@@ -552,6 +552,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onMinigameCompleted: {fileID: 11400000, guid: 540c844c5f46f79459b7d3ee1af5da21, type: 2}
   _onMinigameFailed: {fileID: 11400000, guid: 47485cd65bb53554aa5384ab0dc843a8, type: 2}
+  _onMinigameEnded: {fileID: 0}
+  _minigameSucceeded: {fileID: 0}
+  _onSuccceededFeedbacks: {fileID: 0}
+  _onFailedFeedbacks: {fileID: 0}
   _taskText: {fileID: 2113132192}
   _minigameTaskContainer: {fileID: 11400000, guid: 82ea2418bbdea0e42a3a2f574b0856f8, type: 2}
 --- !u!4 &1195977753
@@ -1052,7 +1056,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2279465199362814522, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2279465200662862956, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_Name
