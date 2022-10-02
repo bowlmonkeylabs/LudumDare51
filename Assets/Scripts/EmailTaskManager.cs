@@ -63,8 +63,9 @@ namespace BML.Scripts {
 
             for(var i = 0; i < addTotalEmails; i++)
             {
-                var randSpam = _spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)];
-                var randomTask = _taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)];
+                var randSpam = _spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count)];
+                var randomTask = _taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count)];
+                
                 if(addSpamCount > 0 && addEmailCount > 0) 
                 {
                     bool chooseSpam = UnityEngine.Random.value > 0.5 ? true : false;
