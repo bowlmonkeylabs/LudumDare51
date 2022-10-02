@@ -12,9 +12,10 @@ namespace EmailInbox
     {
         #region Inspector
 
-        [SerializeField, ReadOnly] private EmailItem _emailData;
+        [SerializeField, ReadOnly] private UiInboxItemController.OpenEmailPayload? _emailData;
         
         [SerializeField] private DynamicGameEvent _onOpenEmail;
+        [SerializeField] private DynamicGameEvent _onCloseEmail;
         
         [Required, SerializeField] private TMP_Text _textFromAddress;
         [Required, SerializeField] private TMP_Text _textSubject;
@@ -40,11 +41,14 @@ namespace EmailInbox
             _emailData = null;
             RenderEmailData();
             _onOpenEmail.Subscribe(OnOpenEmailDynamic);
+            _onMinigameSuccess.Subscribe(OnMinigameSuccess);
+            _onMinigameFail.Subscribe(OnMinigameFailed);
         }
 
         private void OnDestroy()
         {
             _onOpenEmail.Unsubscribe(OnOpenEmailDynamic);
+            _onMinigameFail.Unsubscribe(OnMinigameFailed);
         }
 
         #endregion
@@ -53,13 +57,15 @@ namespace EmailInbox
 
         private void OnOpenEmailDynamic(object prevValue, object currentValue)
         {
-            var curr = currentValue as EmailItem;
-            OnOpenEmail(curr);
+            var payload = currentValue as UiInboxItemController.OpenEmailPayload?;
+            if (payload == null) return;
+            
+            OnOpenEmail(payload.Value);
         }
 
-        private void OnOpenEmail(EmailItem emailItem)
+        private void OnOpenEmail(UiInboxItemController.OpenEmailPayload emailData)
         {
-            _emailData = emailItem;
+            _emailData = emailData;
             RenderEmailData();
         }
 
@@ -70,13 +76,18 @@ namespace EmailInbox
             
             if (!showThisObject) return;
 
-            _textFromAddress.text = _emailData.FromAddress;
-            _textSubject.text = _emailData.Subject;
-            _textBody.text = _emailData.Body;
+            _textFromAddress.text = _emailData.Value.EmailData.FromAddress;
+            _textSubject.text = _emailData.Value.EmailData.Subject;
+            _textBody.text = _emailData.Value.EmailData.Body;
         }
 
-        public void CloseEmail()
+        public void CloseEmail(bool removeFromInbox = true)
         {
+            if (removeFromInbox)
+            {
+                _onCloseEmail.Raise(_emailData);
+            }
+            
             _emailData = null;
             RenderEmailData();
         }
@@ -87,14 +98,14 @@ namespace EmailInbox
             {
                 return;
             }
-            if (_emailData.IsSpam)
+            if (_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyAcceptSpam?.Invoke();
                 CloseEmail();
                 return;
             }
             
-            SceneManager.LoadScene(_emailData.MinigameScene.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameScene.name, LoadSceneMode.Additive);
             _onSuccessAcceptTask?.Invoke();
         }
 
@@ -104,32 +115,32 @@ namespace EmailInbox
             {
                 return;
             }
-            if (!_emailData.IsSpam)
+            if (!_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyRejectTask?.Invoke();
                 CloseEmail();
                 return;
             }
             
-            // TODO remove from inbox
             _onSuccessRejectSpam?.Invoke();
             CloseEmail();
         }
 
         public void OnMinigameSuccess()
         {
+            Debug.Log($"UiEmailViewerController OnMinigameSuccess");
+            
             _onMinigameSuccessCallback?.Invoke();
             
-            // TODO remove from inbox
-            
+            SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
             CloseEmail();
         }
 
         public void OnMinigameFailed()
         {
-            _onMinigameFailedCallback?.Invoke();
+            Debug.Log($"UiEmailViewerController OnMinigameFailed");
             
-            // TODO remove from inbox
+            _onMinigameFailedCallback?.Invoke();
             
             CloseEmail();
         }

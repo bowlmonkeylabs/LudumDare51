@@ -50,6 +50,12 @@ namespace EmailInbox
             OnUpdateInboxItems?.Invoke();
         }
 
+        public void RemoveInboxItem(int index)
+        {
+            InboxItems.RemoveAt(index);
+            OnUpdateInboxItems?.Invoke();
+        }
+
         public void ClearInboxItems()
         {
             InboxItems.Clear();

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a362419e36a5f4aa1fe1476aec8426, type: 3}
   m_Name: EmailInbox_OpenEmailData
   m_EditorClassIdentifier: 
-  Description: This dynamic game event expects an argument of type "EmailData"
+  Description: "This dynamic game event expects an argument of type:\n\npublic struct
+    OpenEmailPayload\r\n{\r\n    public int Guid;\r\n    public EmailItem EmailData;\r\n}"

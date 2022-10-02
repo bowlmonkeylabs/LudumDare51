@@ -5654,6 +5654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inboxState: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
   _listContainer: {fileID: 1826571505}
+  _onCloseEmail: {fileID: 11400000, guid: fa25201f81a86bd4fb1936c5e41d355c, type: 2}
 --- !u!114 &1339870701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7008,8 +7009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b6512da8aa456782eba96fdbf7ad74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emailData: {fileID: 0}
   _onOpenEmail: {fileID: 11400000, guid: 112cdc88628f78b47a701758cfacfbd6, type: 2}
+  _onCloseEmail: {fileID: 11400000, guid: fa25201f81a86bd4fb1936c5e41d355c, type: 2}
   _textFromAddress: {fileID: 271739548}
   _textSubject: {fileID: 717438356}
   _textBody: {fileID: 485233261}
@@ -7075,30 +7076,18 @@ MonoBehaviour:
         m_CallState: 2
   _onSuccessRejectSpam:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onMinigameSuccess: {fileID: 11400000, guid: 540c844c5f46f79459b7d3ee1af5da21, type: 2}
   _onMinigameSuccessCallback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 595015208}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

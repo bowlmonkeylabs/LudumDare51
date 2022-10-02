@@ -45,9 +45,19 @@ namespace EmailInbox
             _textSubject.text = _emailData.Subject;
         }
 
+        public struct OpenEmailPayload
+        {
+            public int InstanceId;
+            public EmailItem EmailData;
+        }
         public void OpenEmail()
         {
-            _openEmail.Raise(_emailData);
+            var payload = new OpenEmailPayload
+            {
+                InstanceId = this.gameObject.GetInstanceID(),
+                EmailData = _emailData,
+            };
+            _openEmail.Raise(payload);
         }
         
         #endregion

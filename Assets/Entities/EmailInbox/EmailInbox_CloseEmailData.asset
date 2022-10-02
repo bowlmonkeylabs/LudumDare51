@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3077adfb25ff9e4438cb6de9785514d7, type: 3}
-  m_Name: EmailTaskTimer
+  m_Script: {fileID: 11500000, guid: d3a362419e36a5f4aa1fe1476aec8426, type: 3}
+  m_Name: EmailInbox_CloseEmailData
   m_EditorClassIdentifier: 
-  Duration: 5
-  Description: 
+  Description: "This dynamic game event expects an argument of type:\n\npublic struct
+    OpenEmailPayload\r\n{\r\n    public int Guid;\r\n    public EmailItem EmailData;\r\n}"

@@ -131,10 +131,10 @@ namespace BML.Scripts
             if (hit.collider != null)
             {
                 GameObject hitObj = hit.collider.gameObject;
-                Debug.Log($"Hit object in additive scene: {hitObj.name}");
+                // Debug.Log($"Hit object in additive scene: {hitObj.name}");
                 if (hitObj.IsInLayerMask(_hitMask))
                 {
-                    Debug.Log("Hit object belongs to hit layermask");
+                    // Debug.Log("Hit object belongs to hit layermask");
                     return hitObj;
                 }
             }
