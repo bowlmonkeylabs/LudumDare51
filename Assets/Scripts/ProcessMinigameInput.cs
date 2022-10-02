@@ -16,10 +16,6 @@ namespace BML.Scripts
     {
         [SerializeField] private LayerMask _hitMask;
         [Required, SerializeField] private RectTransform _minigameRect;
-        [Required, SerializeField] private RawImage _minigameImage;
-        [Required, SerializeField] private CanvasScaler _minigameCanvasScaler;
-        [Required, SerializeField] private Canvas _minigameCanvas;
-        
         [Required, SerializeField] private RectTransform _parentCanvasRect;
         [Required, SerializeField] private CameraSceneReference _minigameCamera;
         [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;

@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using BML.ScriptableObjectCore.Scripts.Variables;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,15 +14,24 @@ namespace EmailInbox
 
         [InlineEditor] public List<EmailItem> InboxItems;
 
+        [SerializeField] private IntVariable _totalInboxItems;
+        [SerializeField] private IntVariable _taskInboxItems;
+        [SerializeField] private IntVariable _spamInboxItems;
+
         public int TotalInboxItems => InboxItems.Count;
-        public int InboxTaskItems => InboxItems.Count(e => !e.IsSpam);
-        public int InboxSpamItems => InboxItems.Count(e => e.IsSpam);
+        public int TaskInboxItems => InboxItems.Count(e => !e.IsSpam);
+        public int SpamInboxItems => InboxItems.Count(e => e.IsSpam);
 
         #endregion
 
         #region Unity lifecycle
 
-
+        public void MonoBehaviourAwake()
+        {
+            if (_totalInboxItems != null) _totalInboxItems.Value = TotalInboxItems;
+            if (_taskInboxItems != null) _taskInboxItems.Value = TaskInboxItems;
+            if (_spamInboxItems != null) _spamInboxItems.Value = SpamInboxItems;
+        }
 
         #endregion
     }

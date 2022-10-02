@@ -22,6 +22,8 @@ namespace EmailInbox
 
         private void Awake()
         {
+            _inboxState.MonoBehaviourAwake();
+            
             // Discover child email preview child objects
             _children.Clear();
             for (int i = 0; i < _listContainer.childCount; i++)
