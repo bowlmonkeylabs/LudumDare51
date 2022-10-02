@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Plunger_Minigame.unity
     guid: c6f0755d2e322bd468373ad20921216f
+  - enabled: 1
+    path: Assets/Scenes/AIPicture_Minigame.unity
+    guid: a8c21806bd6dee044849320fbf0bf4b2
   m_configObjects: {}
