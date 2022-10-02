@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BML.ScriptableObjectCore.Scripts.Events;
 using BML.Scripts.ScriptableObjects;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace BML.Scripts
 {
@@ -15,8 +18,8 @@ namespace BML.Scripts
         [SerializeField] private TMP_Text _taskText;
         [SerializeField] private MinigameTaskContainer _minigameTaskContainer;
 
-        private List<MinigameTask> Tasks => _minigameTaskContainer._minigameTasks;
-        
+        [ShowInInspector, ReadOnly] private List<MinigameTask> Tasks;
+
         private MinigameTask currentTask;
         private float minigameStartTime = Mathf.NegativeInfinity;
         private bool isMiniGameStarted;
@@ -92,6 +95,10 @@ namespace BML.Scripts
 
         private void StartMinigame()
         {
+            Tasks = (_minigameTaskContainer.RandomizeTaskOrder)
+                ? _minigameTaskContainer._minigameTasks.OrderBy(t => Random.value).ToList()
+                : _minigameTaskContainer._minigameTasks;
+            
             isMiniGameStarted = true;
             minigameStartTime = Time.time;
 

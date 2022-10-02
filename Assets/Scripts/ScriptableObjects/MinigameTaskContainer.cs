@@ -13,6 +13,7 @@ namespace BML.Scripts.ScriptableObjects
         public float _timeToComplete = 5f;
         public string _winText = "You Win!";
         public string _loseText = "You Lose!";
+        public bool RandomizeTaskOrder = false;
         public List<MinigameTask> _minigameTasks = new List<MinigameTask>();
     }
 }

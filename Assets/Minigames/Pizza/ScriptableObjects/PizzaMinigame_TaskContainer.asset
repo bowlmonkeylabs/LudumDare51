@@ -15,6 +15,7 @@ MonoBehaviour:
   _timeToComplete: 30
   _winText: You Win!
   _loseText: You Lose!
+  RandomizeTaskOrder: 1
   _minigameTasks:
   - {fileID: 11400000, guid: 96e8361060bf2f846a2dfec6979dc793, type: 2}
   - {fileID: 11400000, guid: 78f76d87c277f1a45ad39c9bc0697b13, type: 2}
