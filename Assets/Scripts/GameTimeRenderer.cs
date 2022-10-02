@@ -27,9 +27,9 @@ namespace BML.Scripts {
 
         private void UpdateText() 
         {
-            var time = (int)(_gameTimer.ElapsedTime * 48);
-            var hours = time / 60 / 60;
-            var minutes = time / 60;
+            var time = (int)(_gameTimer.ElapsedTime * _timerStep);
+            var hours = (time / 60 / 60) + 9;
+            var minutes = (time / 60) % 60;
             
             _textComp.text = $"{$"{hours}".PadLeft(2, '0')}:{$"{minutes}".PadLeft(2, '0')}";
         }
