@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace EmailInbox
@@ -36,8 +37,14 @@ namespace EmailInbox
                 _children.Add(item);
             }
             
-            // TODO render at the right time
+            
             RenderList();
+            _inboxState.OnUpdateInboxItems += RenderList;
+        }
+
+        private void OnDestroy()
+        {
+            _inboxState.OnUpdateInboxItems -= RenderList;
         }
 
         #endregion

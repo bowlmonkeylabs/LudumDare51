@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403e06945dbd4e72a99219c8ef6c5790, type: 3}
   m_Name: Email Inbox
   m_EditorClassIdentifier: 
-  InboxItems:
-  - {fileID: 11400000, guid: fc21f13deed94384882d4172cc297b42, type: 2}
-  - {fileID: 11400000, guid: 8870add6dc009324aaf97ddbd699f60e, type: 2}
-  - {fileID: 11400000, guid: 052ab00268d222549a0c9436200c3d94, type: 2}
+  InboxItems: []
+  _totalInboxItems: {fileID: 11400000, guid: 306a78a7273d2284e93550ed26daefe8, type: 2}
+  _taskInboxItems: {fileID: 11400000, guid: 7af9c558c0c163847a6923c1e199f8d2, type: 2}
+  _spamInboxItems: {fileID: 11400000, guid: 712a133c169f8f647985b4745674e8e1, type: 2}

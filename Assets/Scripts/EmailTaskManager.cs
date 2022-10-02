@@ -19,7 +19,10 @@ namespace BML.Scripts {
 
         #region Unity lifecycle
 
-        void Awake() {
+        void Awake() 
+        {
+            _inboxState.ClearInboxItems();
+            
             _spamEmails = _emailItems.Where(emailItem => {
                 return emailItem.IsSpam;
             }).ToList();
@@ -47,7 +50,8 @@ namespace BML.Scripts {
 
         #endregion
 
-        private void OnEmailTimerFinished() {
+        private void OnEmailTimerFinished() 
+        {
             int addEmailCount = 1;
             int addSpamCount = UnityEngine.Random.value > 0.5 ? 1 : 0;
 
@@ -57,27 +61,32 @@ namespace BML.Scripts {
 
             int addTotalEmails = addEmailCount + addSpamCount;
 
-            for(var i = 0; i < addTotalEmails; i++) {
-                if(addSpamCount > 0 && addEmailCount > 0) {
+            for(var i = 0; i < addTotalEmails; i++)
+            {
+                var randSpam = _spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)];
+                var randomTask = _taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)];
+                if(addSpamCount > 0 && addEmailCount > 0) 
+                {
                     bool chooseSpam = UnityEngine.Random.value > 0.5 ? true : false;
                     if(chooseSpam) {
-                        _inboxState.InboxItems.Add(_spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
+                        _inboxState.AddInboxItem(randSpam);
                         addSpamCount--;
                     } else {
-                        _inboxState.InboxItems.Add(_taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
+                        _inboxState.AddInboxItem(randomTask);
                         addEmailCount--;
                     }
 
                     continue;
                 }
 
-                if(addEmailCount > 0) {
-                    _inboxState.InboxItems.Add(_taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
+                if(addEmailCount > 0)
+                {
+                    _inboxState.AddInboxItem(randomTask);
                     addEmailCount--;
                     continue;
                 }
 
-                _inboxState.InboxItems.Add(_spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
+                _inboxState.AddInboxItem(randSpam);
                 addSpamCount--;
             }
 

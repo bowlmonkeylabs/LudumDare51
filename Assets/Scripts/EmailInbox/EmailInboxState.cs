@@ -24,6 +24,13 @@ namespace EmailInbox
 
         #endregion
 
+        #region Events
+
+        public delegate void UpdateInboxItems();
+        public event UpdateInboxItems OnUpdateInboxItems;
+
+        #endregion
+
         #region Unity lifecycle
 
         public void MonoBehaviourAwake()
@@ -31,6 +38,21 @@ namespace EmailInbox
             if (_totalInboxItems != null) _totalInboxItems.Value = TotalInboxItems;
             if (_taskInboxItems != null) _taskInboxItems.Value = TaskInboxItems;
             if (_spamInboxItems != null) _spamInboxItems.Value = SpamInboxItems;
+        }
+
+        #endregion
+
+        #region Public interface
+
+        public void AddInboxItem(EmailItem emailItem)
+        {
+            InboxItems.Add(emailItem);
+            OnUpdateInboxItems?.Invoke();
+        }
+
+        public void ClearInboxItems()
+        {
+            InboxItems.Clear();
         }
 
         #endregion
