@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5963b1a3e0248d789fb6bfa7dfda4eb, type: 3}
-  m_Name: PizzaMinigame_TaskContainer
+  m_Name: PlungerMinigame_TaskContainer
   m_EditorClassIdentifier: 
   _timeToComplete: 30
   _winText: You Win!
   _loseText: You Lose!
   _minigameTasks:
-  - {fileID: 11400000, guid: 96e8361060bf2f846a2dfec6979dc793, type: 2}
-  - {fileID: 11400000, guid: 78f76d87c277f1a45ad39c9bc0697b13, type: 2}
-  - {fileID: 11400000, guid: 458181d78b477134aa6a6cb3e669fbc5, type: 2}
+  - {fileID: 11400000, guid: 492a9c3802340c248b67ad051c69b374, type: 2}
+  - {fileID: 11400000, guid: ecc4d26b686a21d4fa83d34467eba8c9, type: 2}
