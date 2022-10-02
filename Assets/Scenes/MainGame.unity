@@ -1348,6 +1348,7 @@ Transform:
   - {fileID: 1856031093}
   - {fileID: 674053823}
   - {fileID: 866220989}
+  - {fileID: 1383726258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7242,10 +7243,10 @@ RectTransform:
   m_Father: {fileID: 1984970407}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 164.63, y: -18.75}
-  m_SizeDelta: {x: 37.5, y: 37.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195018510
 MonoBehaviour:
@@ -7878,10 +7879,10 @@ RectTransform:
   m_Father: {fileID: 1984970407}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 199.19, y: -18.75}
-  m_SizeDelta: {x: 31.62, y: 37.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275011735
 MonoBehaviour:
@@ -8868,6 +8869,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382399688}
   m_CullTransparentMesh: 1
+--- !u!1 &1383726257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383726258}
+  - component: {fileID: 1383726259}
+  m_Layer: 0
+  m_Name: ScriptableObjectResetManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1383726258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383726257}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 340835523}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1383726259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383726257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ae23945dc17674f9449284de1a2a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetContainer: {fileID: 11400000, guid: 5d6df2c5412b71140bf5d502321d7d0a, type: 2}
 --- !u!1 &1418986387
 GameObject:
   m_ObjectHideFlags: 0
@@ -10525,19 +10570,7 @@ MonoBehaviour:
   _onMinigameSuccess: {fileID: 11400000, guid: 540c844c5f46f79459b7d3ee1af5da21, type: 2}
   _onMinigameSuccessCallback:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 595015208}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _onMinigameFail: {fileID: 11400000, guid: 47485cd65bb53554aa5384ab0dc843a8, type: 2}
   _onMinigameFailedCallback:
     m_PersistentCalls:
@@ -10555,6 +10588,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _onMinigameEnded: {fileID: 11400000, guid: e1317443897608e4d96a3b3fb3afe4f1, type: 2}
+  _onMinigameEndedCallback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 595015208}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _lastMinigameSuccess:
+    UseConstant: 0
+    EnableInstanceOptions: 0
+    InstanceName: 
+    InstancePath: IntermediateProperties
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 06b8515a9a4d1574a9dc6d9954e552de, type: 2}
 --- !u!1 &1717197243
 GameObject:
   m_ObjectHideFlags: 0

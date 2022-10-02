@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using BML.ScriptableObjectCore.Scripts.Events;
+using BML.ScriptableObjectCore.Scripts.Variables;
 using BML.Scripts.ScriptableObjects;
+using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -15,6 +17,12 @@ namespace BML.Scripts
     {
         [SerializeField] private GameEvent _onMinigameCompleted;
         [SerializeField] private GameEvent _onMinigameFailed;
+        [SerializeField] private GameEvent _onMinigameEnded;
+        [SerializeField] private BoolVariable _minigameSucceeded;
+
+        [SerializeField] private MMF_Player _onSuccceededFeedbacks;
+        [SerializeField] private MMF_Player _onFailedFeedbacks;
+        
         [SerializeField] private TMP_Text _taskText;
         [SerializeField] private MinigameTaskContainer _minigameTaskContainer;
 
@@ -98,7 +106,8 @@ namespace BML.Scripts
             Tasks = (_minigameTaskContainer.RandomizeTaskOrder)
                 ? _minigameTaskContainer._minigameTasks.OrderBy(t => Random.value).ToList()
                 : _minigameTaskContainer._minigameTasks;
-            
+
+            _minigameSucceeded.Value = false;
             isMiniGameStarted = true;
             minigameStartTime = Time.time;
 
@@ -108,18 +117,39 @@ namespace BML.Scripts
 
         private void OnMinigameComplete()
         {
+            Debug.Log($"Minigame SUCCEEDED");
+
+            _minigameSucceeded.Value = true;
             _onMinigameCompleted.Raise();
             isMiniGameStarted = false;
             _taskText.text = _minigameTaskContainer._winText;
             CleanUp();
+            
+            // NEED to call OnMinigameEnded() at the end of these feedbacks !!!
+            if (_onSuccceededFeedbacks != null) _onSuccceededFeedbacks.PlayFeedbacks();
+            else OnMinigameEnded();
         }
         
         private void OnMinigameFailed()
         {
+            Debug.Log($"Minigame FAILED");
+
+            _minigameSucceeded.Value = false;
             _onMinigameFailed.Raise();
             isMiniGameStarted = false;
             _taskText.text = _minigameTaskContainer._loseText;
             CleanUp();
+            
+            // NEED to call OnMinigameEnded() at the end of these feedbacks !!!
+            if (_onFailedFeedbacks != null) _onFailedFeedbacks.PlayFeedbacks();
+            else OnMinigameEnded();
+        }
+
+        public void OnMinigameEnded()
+        {
+            Debug.Log($"Minigame ENDED");
+            
+            _onMinigameEnded.Raise();
         }
 
         // Don't leave any event subscriptions active

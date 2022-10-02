@@ -6,6 +6,11 @@ MonoImporter:
   defaultReferences:
   - _onMinigameCompleted: {fileID: 11400000, guid: 540c844c5f46f79459b7d3ee1af5da21, type: 2}
   - _onMinigameFailed: {fileID: 11400000, guid: 47485cd65bb53554aa5384ab0dc843a8, type: 2}
+  - _onMinigameEnded: {fileID: 11400000, guid: e1317443897608e4d96a3b3fb3afe4f1, type: 2}
+  - _minigameSucceeded: {fileID: 11400000, guid: 06b8515a9a4d1574a9dc6d9954e552de, type: 2}
+  - _onSuccceededFeedbacks: {instanceID: 0}
+  - _onFailedFeedbacks: {instanceID: 0}
+  - _taskText: {instanceID: 0}
   - _minigameTaskContainer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

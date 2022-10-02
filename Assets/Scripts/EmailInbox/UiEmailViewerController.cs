@@ -33,6 +33,10 @@ namespace EmailInbox
         [SerializeField] private UnityEvent _onMinigameSuccessCallback;
         [Required, SerializeField] private GameEvent _onMinigameFail;
         [SerializeField] private UnityEvent _onMinigameFailedCallback;
+        
+        [Required, SerializeField] private GameEvent _onMinigameEnded;
+        [SerializeField] private UnityEvent _onMinigameEndedCallback;
+        [Required, SerializeField] private BoolReference _lastMinigameSuccess; 
 
         #endregion
 
@@ -45,12 +49,14 @@ namespace EmailInbox
             _onOpenEmail.Subscribe(OnOpenEmailDynamic);
             _onMinigameSuccess.Subscribe(OnMinigameSuccess);
             _onMinigameFail.Subscribe(OnMinigameFailed);
+            _onMinigameEnded.Subscribe(OnMinigameEnded);
         }
 
         private void OnDestroy()
         {
             _onOpenEmail.Unsubscribe(OnOpenEmailDynamic);
             _onMinigameFail.Unsubscribe(OnMinigameFailed);
+            _onMinigameEnded.Unsubscribe(OnMinigameEnded);
         }
 
         #endregion
@@ -69,7 +75,7 @@ namespace EmailInbox
         {
             if (_emailData != null)
             {
-                CloseEmail(false, true);
+                CloseEmail(false);
             }
             
             _emailData = emailInstanceData;
@@ -77,19 +83,10 @@ namespace EmailInbox
             RenderEmailData();
         }
         
-        public void CloseEmail(bool removeFromInbox = true, bool unloadScene = false)
+        public void CloseEmail(bool removeFromInbox = true)
         {
-            if (unloadScene)
-            {
-                try
-                {
-                    SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
+            CloseMinigame();
+            
             if (removeFromInbox)
             {
                 _onCloseEmail.Raise(_emailData);
@@ -125,7 +122,7 @@ namespace EmailInbox
                 return;
             }
             
-            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameScene.name, LoadSceneMode.Additive);
+            OpenMinigame();
             _onSuccessAcceptTask?.Invoke();
         }
 
@@ -146,13 +143,34 @@ namespace EmailInbox
             CloseEmail();
         }
 
+        #endregion
+        
+        #region Minigame
+
+        public void OpenMinigame()
+        {
+            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameScene.name, LoadSceneMode.Additive);
+        }
+
+        public void CloseMinigame()
+        {
+            try
+            {
+                SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        
         public void OnMinigameSuccess()
         {
             // Debug.Log($"UiEmailViewerController OnMinigameSuccess");
             
             _onMinigameSuccessCallback?.Invoke();
             
-            CloseEmail(true, true);
+            // CloseEmail(true);
         }
 
         public void OnMinigameFailed()
@@ -161,9 +179,16 @@ namespace EmailInbox
             
             _onMinigameFailedCallback?.Invoke();
             
-            CloseEmail();
+            // CloseEmail();
         }
 
+        public void OnMinigameEnded()
+        {
+            _onMinigameEndedCallback?.Invoke();
+            
+            CloseEmail(_lastMinigameSuccess.Value);
+        }
+        
         #endregion
     }
 }
