@@ -69,6 +69,9 @@ ProjectSettings/Packages/com.unity.progrids/[Ss]ettings.json
 /Recordings
 /Recordings.meta
 
+# Editor User Settings
+UserSettings/EditorUserSettings.asset
+
 # Project bash environment
 .env.sh
 .REINSTALL-ENV.sh
