@@ -1,5 +1,6 @@
 ﻿using System;
 using BML.ScriptableObjectCore.Scripts.Events;
+using BML.ScriptableObjectCore.Scripts.Variables;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace EmailInbox
         
         [SerializeField] private DynamicGameEvent _onOpenEmail;
         [SerializeField] private DynamicGameEvent _onCloseEmail;
+        [SerializeField] private UnityEvent _onCloseEmailCallback;
         
         [Required, SerializeField] private TMP_Text _textFromAddress;
         [Required, SerializeField] private TMP_Text _textSubject;
@@ -65,7 +67,35 @@ namespace EmailInbox
 
         private void OnOpenEmail(UiInboxItemController.OpenEmailPayload emailData)
         {
+            if (_emailData != null)
+            {
+                CloseEmail(false, true);
+            }
+            
             _emailData = emailData;
+            RenderEmailData();
+        }
+        
+        public void CloseEmail(bool removeFromInbox = true, bool unloadScene = false)
+        {
+            if (unloadScene)
+            {
+                try
+                {
+                    SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
+            if (removeFromInbox)
+            {
+                _onCloseEmail.Raise(_emailData);
+            }
+            
+            _emailData = null;
+            _onCloseEmailCallback?.Invoke();
             RenderEmailData();
         }
 
@@ -79,17 +109,6 @@ namespace EmailInbox
             _textFromAddress.text = _emailData.Value.EmailData.FromAddress;
             _textSubject.text = _emailData.Value.EmailData.Subject;
             _textBody.text = _emailData.Value.EmailData.Body;
-        }
-
-        public void CloseEmail(bool removeFromInbox = true)
-        {
-            if (removeFromInbox)
-            {
-                _onCloseEmail.Raise(_emailData);
-            }
-            
-            _emailData = null;
-            RenderEmailData();
         }
 
         public void OnClickAccept()
@@ -132,8 +151,7 @@ namespace EmailInbox
             
             _onMinigameSuccessCallback?.Invoke();
             
-            SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
-            CloseEmail();
+            CloseEmail(true, true);
         }
 
         public void OnMinigameFailed()
