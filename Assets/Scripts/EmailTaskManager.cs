@@ -5,32 +5,32 @@ using Sirenix.OdinInspector;
 using EmailInbox;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace BML.Scripts {
     public class EmailTaskManager : MonoBehaviour
     {
         [SerializeField] private bool _initialDelay = false;
+        
         [SerializeField] private TimerVariable _emailTimer;
         [SerializeField] private TimerVariable _gameTimer;
         [Required, SerializeField] private EmailInboxState _inboxState;
-        [SerializeField] private List<EmailItem> _emailItems;
+        [FormerlySerializedAs("_emailItems")] [SerializeField] private List<EmailItem> _emailItemChoices;
 
-        private List<EmailItem> _spamEmails;
-        private List<EmailItem> _taskEmails;
+        private Queue<EmailItem> _spamEmailQueue;
+        private Queue<EmailItem> _taskEmailQueue;
 
         #region Unity lifecycle
 
         void Awake() 
         {
             _inboxState.ClearInboxItems();
-            
-            _spamEmails = _emailItems.Where(emailItem => {
-                return emailItem.IsSpam;
-            }).ToList();
 
-            _taskEmails = _emailItems.Where(emailItem => {
-                return !emailItem.IsSpam;
-            }).ToList();
+            _spamEmailQueue = new Queue<EmailItem>();
+            QueueSpamEmailChoices();
+            _taskEmailQueue = new Queue<EmailItem>();
+            QueueTaskEmailChoices();
         }
 
         void OnEnable() {
@@ -55,47 +55,81 @@ namespace BML.Scripts {
 
         #endregion
 
+        #region Emails
+
+        private void QueueSpamEmailChoices()
+        {
+            var addItems = _emailItemChoices
+                .Where(emailItem => emailItem.IsSpam)
+                .OrderBy(emailItem => Random.value);
+            foreach (var emailItem in addItems)
+            {
+                _spamEmailQueue.Enqueue(emailItem);
+            }
+        }
+
+        private void QueueTaskEmailChoices()
+        {
+            var addItems = _emailItemChoices
+                .Where(emailItem => !emailItem.IsSpam)
+                .OrderBy(emailItem => Random.value);
+            foreach (var emailItem in addItems)
+            {
+                _taskEmailQueue.Enqueue(emailItem);
+            }
+        }
+
+        #endregion
+
         private void OnEmailTimerFinished() 
         {
-            int addEmailCount = 1;
+            // Calculate how many emails of each type to add
             int addSpamCount = UnityEngine.Random.value > 0.5 ? 1 : 0;
+            int addTaskCount = 1;
+            if ((_gameTimer.ElapsedTime / _gameTimer.Duration) >= 0.9) 
+            {
+                addTaskCount++;
+            }
+            int addTotalEmails = addTaskCount + addSpamCount;
 
-            if((_gameTimer.ElapsedTime / _gameTimer.Duration) >= 0.9) {
-                addEmailCount++;
+            if (addSpamCount >= _spamEmailQueue.Count)
+            {
+                QueueSpamEmailChoices();
+            }
+            if (addTaskCount >= _taskEmailQueue.Count)
+            {
+                QueueTaskEmailChoices();
             }
 
-            int addTotalEmails = addEmailCount + addSpamCount;
-
+            // Add emails
             for(var i = 0; i < addTotalEmails; i++)
             {
-                var randSpam = _spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count)];
-                var randomTask = _taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count)];
-                
-                if(addSpamCount > 0 && addEmailCount > 0) 
+                if(addSpamCount > 0 && addTaskCount > 0) 
                 {
                     bool chooseSpam = UnityEngine.Random.value > 0.5 ? true : false;
                     if(chooseSpam) {
-                        _inboxState.AddInboxItem(randSpam);
+                        _inboxState.AddInboxItem(_spamEmailQueue.Dequeue());
                         addSpamCount--;
                     } else {
-                        _inboxState.AddInboxItem(randomTask);
-                        addEmailCount--;
+                        _inboxState.AddInboxItem(_taskEmailQueue.Dequeue());
+                        addTaskCount--;
                     }
 
                     continue;
                 }
 
-                if(addEmailCount > 0)
+                if(addTaskCount > 0)
                 {
-                    _inboxState.AddInboxItem(randomTask);
-                    addEmailCount--;
+                    _inboxState.AddInboxItem(_taskEmailQueue.Dequeue());
+                    addTaskCount--;
                     continue;
                 }
 
-                _inboxState.AddInboxItem(randSpam);
+                _inboxState.AddInboxItem(_spamEmailQueue.Dequeue());
                 addSpamCount--;
             }
 
+            // Reset timer
             _emailTimer.ResetTimer();
             _emailTimer.StartTimer();
         }
