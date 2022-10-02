@@ -1,6 +1,7 @@
 using BML.ScriptableObjectCore.Scripts.Variables;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 namespace BML.Scripts {
     public class WorldManager : MonoBehaviour
@@ -13,6 +14,11 @@ namespace BML.Scripts {
         [SerializeField] private TimerVariable _gameTimer;
         [SerializeField] private IntVariable _strikeCount;
         [SerializeField] private IntVariable _unreadEmailCount;
+
+        [TitleGroup("Win Lose Events")]
+        [SerializeField] private UnityEvent _onWin;
+        [SerializeField] private UnityEvent _onLoseStrikes;
+        [SerializeField] private UnityEvent _onLoseInbox;
 
         void Update() {
             _gameTimer.UpdateTime();
@@ -35,18 +41,18 @@ namespace BML.Scripts {
         }
 
         private void OnGameTimeEnd() {
-            Debug.Log("Win");
+            _onWin.Invoke();
         }
 
         private void OnStrikeCountUpdate(int prevVal, int newVal) {
-            if(newVal > _maxStrikeCount) {
-                Debug.Log("Lose");
+            if(newVal >= _maxStrikeCount) {
+                _onLoseStrikes.Invoke();
             }
         }
 
         private void OnUnreadEmailCountUpdate(int prevVal, int newVal) {
-            if(newVal > _maxUnreadEmailCount) {
-                Debug.Log("Lose");
+            if(newVal >= _maxUnreadEmailCount) {
+                _onLoseInbox.Invoke();
             }
         }
     }
