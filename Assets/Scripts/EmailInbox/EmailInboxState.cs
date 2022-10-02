@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BML.ScriptableObjectCore.Scripts.Events;
 using BML.ScriptableObjectCore.Scripts.Variables;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace EmailInbox
         #region Inspector
 
         [InlineEditor] public List<EmailItem> InboxItems;
+
+        [InlineEditor, ReadOnly] public EmailInstancePayload? SelectedItem;
 
         [SerializeField] private IntVariable _totalInboxItems;
         [SerializeField] private IntVariable _taskInboxItems;
@@ -38,6 +41,11 @@ namespace EmailInbox
             UpdateCounts();
         }
 
+        public void MonoBehaviourOnDestroy()
+        {
+            SelectedItem = null;
+        }
+
         #endregion
 
         #region Public interface
@@ -59,6 +67,7 @@ namespace EmailInbox
         public void ClearInboxItems()
         {
             InboxItems.Clear();
+            SelectedItem = null;
             UpdateCounts();
             OnUpdateInboxItems?.Invoke();
         }

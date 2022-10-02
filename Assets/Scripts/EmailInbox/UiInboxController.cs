@@ -16,6 +16,7 @@ namespace EmailInbox
         [Required, SerializeField] private Transform _listContainer;
         // [Required, SerializeField] private GameObject _emailItemPreviewPrefab;
 
+        [Required, SerializeField] private DynamicGameEvent _onOpenEmail;
         [Required, SerializeField] private DynamicGameEvent _onCloseEmail;
 
         [ShowInInspector, ReadOnly] private List<UiInboxItemController> _children = new List<UiInboxItemController>();
@@ -43,12 +44,16 @@ namespace EmailInbox
             
             RenderList();
             _inboxState.OnUpdateInboxItems += RenderList;
+            _onOpenEmail.Subscribe(OnOpenEmailDynamic);
             _onCloseEmail.Subscribe(RemoveEmailDynamic);
         }
 
         private void OnDestroy()
         {
+            _inboxState.MonoBehaviourOnDestroy();
+            
             _inboxState.OnUpdateInboxItems -= RenderList;
+            _onOpenEmail.Unsubscribe(OnOpenEmailDynamic);
             _onCloseEmail.Unsubscribe(RemoveEmailDynamic);
         }
 
@@ -66,31 +71,56 @@ namespace EmailInbox
 
             for (int i = 0; i < _children.Count; i++)
             {
+                
                 var child = _children[i];
                 var emailData = (i < _inboxState.InboxItems.Count)
                     ? _inboxState.InboxItems[i]
                     : null;
                 child.EmailData = emailData;
+                
+                var isCurrentlySelected = (_inboxState.SelectedItem.HasValue &&
+                                           _inboxState.SelectedItem.Value.InstanceId ==
+                                           child.gameObject.GetInstanceID());
+                child.IsSelected = isCurrentlySelected;
             }
         }
         
         #endregion
+        
+        private void OnOpenEmailDynamic(object previousValue, object currentValue)
+        {
+            var payload = currentValue as EmailInstancePayload?;
+            if (payload == null) return;
+
+            OnOpenEmail(payload.Value);
+        }
+
+        private void OnOpenEmail(EmailInstancePayload instancePayload)
+        {
+            _inboxState.SelectedItem = instancePayload;
+        }
 
         private void RemoveEmailDynamic(object previousValue, object currentValue)
         {
-            var payload = currentValue as UiInboxItemController.OpenEmailPayload?;
+            var payload = currentValue as EmailInstancePayload?;
             if (payload == null) return;
-            
+
             RemoveEmail(payload.Value);
         }
 
-        private void RemoveEmail(UiInboxItemController.OpenEmailPayload emailData)
+        private void RemoveEmail(EmailInstancePayload emailInstanceData)
         {
+            if (_inboxState.SelectedItem.HasValue
+                && _inboxState.SelectedItem.Value.InstanceId == emailInstanceData.InstanceId)
+            {
+                _inboxState.SelectedItem = null;
+            }
+            
             var childInstanceIndex =
-                _children.FindIndex(child => child.gameObject.GetInstanceID() == emailData.InstanceId);
+                _children.FindIndex(child => child.gameObject.GetInstanceID() == emailInstanceData.InstanceId);
             if (childInstanceIndex < 0)
             {
-                Debug.Log($"EmailInboxState RemoveInboxItem {emailData.InstanceId} No index found");
+                Debug.Log($"EmailInboxState RemoveInboxItem {emailInstanceData.InstanceId} No index found");
                 return;
             }
             

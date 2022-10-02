@@ -4,10 +4,11 @@ using IKVM.Reflection;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace EmailInbox
 {
-    public class UiInboxItemController : MonoBehaviour
+    public partial class UiInboxItemController : MonoBehaviour
     {
         #region Inspector
 
@@ -22,9 +23,12 @@ namespace EmailInbox
         }
         [SerializeField, ReadOnly] EmailItem _emailData;
 
+        [SerializeField, ReadOnly] public bool IsSelected;
+
         [Required, SerializeField] private DynamicGameEvent _openEmail;
         [Required, SerializeField] private TMP_Text _textFromAddress;
         [Required, SerializeField] private TMP_Text _textSubject;
+        [Required, SerializeField] private Button _button;
 
         #endregion
 
@@ -43,16 +47,14 @@ namespace EmailInbox
 
             _textFromAddress.text = _emailData.FromAddress;
             _textSubject.text = _emailData.Subject;
+
+            var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
+            _button.image.color = color;
         }
 
-        public struct OpenEmailPayload
-        {
-            public int InstanceId;
-            public EmailItem EmailData;
-        }
         public void OpenEmail()
         {
-            var payload = new OpenEmailPayload
+            var payload = new EmailInstancePayload
             {
                 InstanceId = this.gameObject.GetInstanceID(),
                 EmailData = _emailData,

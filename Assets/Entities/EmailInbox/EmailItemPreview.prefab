@@ -189,9 +189,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emailData: {fileID: 0}
+  IsSelected: 0
   _openEmail: {fileID: 11400000, guid: 112cdc88628f78b47a701758cfacfbd6, type: 2}
   _textFromAddress: {fileID: 3478307722139483955}
   _textSubject: {fileID: 2961431140735336736}
+  _button: {fileID: 5241158521510959967}
 --- !u!222 &5241158521510959953
 CanvasRenderer:
   m_ObjectHideFlags: 0

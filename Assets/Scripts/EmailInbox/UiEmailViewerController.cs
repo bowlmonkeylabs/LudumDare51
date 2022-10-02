@@ -13,7 +13,7 @@ namespace EmailInbox
     {
         #region Inspector
 
-        [SerializeField, ReadOnly] private UiInboxItemController.OpenEmailPayload? _emailData;
+        [SerializeField, ReadOnly] private EmailInstancePayload? _emailData;
         
         [SerializeField] private DynamicGameEvent _onOpenEmail;
         [SerializeField] private DynamicGameEvent _onCloseEmail;
@@ -59,20 +59,21 @@ namespace EmailInbox
 
         private void OnOpenEmailDynamic(object prevValue, object currentValue)
         {
-            var payload = currentValue as UiInboxItemController.OpenEmailPayload?;
+            var payload = currentValue as EmailInstancePayload?;
             if (payload == null) return;
             
             OnOpenEmail(payload.Value);
         }
 
-        private void OnOpenEmail(UiInboxItemController.OpenEmailPayload emailData)
+        private void OnOpenEmail(EmailInstancePayload emailInstanceData)
         {
             if (_emailData != null)
             {
                 CloseEmail(false, true);
             }
             
-            _emailData = emailData;
+            _emailData = emailInstanceData;
+            
             RenderEmailData();
         }
         

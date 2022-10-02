@@ -7161,6 +7161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inboxState: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
   _listContainer: {fileID: 1826571505}
+  _onOpenEmail: {fileID: 11400000, guid: 112cdc88628f78b47a701758cfacfbd6, type: 2}
   _onCloseEmail: {fileID: 11400000, guid: fa25201f81a86bd4fb1936c5e41d355c, type: 2}
 --- !u!114 &1339870701
 MonoBehaviour:
