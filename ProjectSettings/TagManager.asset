@@ -9,6 +9,7 @@ TagManager:
   - Toilet
   - Plant
   - Water
+  - Toothbrush
   layers:
   - Default
   - TransparentFX
