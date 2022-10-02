@@ -4,18 +4,24 @@ using BML.ScriptableObjectCore.Scripts.Events;
 using BML.ScriptableObjectCore.Scripts.SceneReferences;
 using BML.ScriptableObjectCore.Scripts.Variables;
 using BML.Scripts.Utils;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace BML.Scripts
 {
     public class ProcessMinigameInput : MonoBehaviour
     {
         [SerializeField] private LayerMask _hitMask;
-        [SerializeField] private RectTransform _minigameRect;
-        [SerializeField] private RectTransform _parentCanvasRect;
-        [SerializeField] private CameraSceneReference _minigameCamera;
+        [Required, SerializeField] private RectTransform _minigameRect;
+        [Required, SerializeField] private RawImage _minigameImage;
+        [Required, SerializeField] private CanvasScaler _minigameCanvasScaler;
+        [Required, SerializeField] private Canvas _minigameCanvas;
+        
+        [Required, SerializeField] private RectTransform _parentCanvasRect;
+        [Required, SerializeField] private CameraSceneReference _minigameCamera;
         [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;
         [SerializeField] private GameEvent _onCancelDrag;
         private bool IsMinigameRunning => _minigameCamera.Value != null;
@@ -104,15 +110,18 @@ namespace BML.Scripts
 
             if (uiRaycast.gameObject == null)
                 return null;
-            
-            float realWidth = _minigameRect.sizeDelta.x * _parentCanvasRect.localScale.x;
-            float realHeight = _minigameRect.sizeDelta.y * _parentCanvasRect.localScale.y;
+
+            var sizeDelta = _minigameRect.sizeDelta;
+            var localScale = _parentCanvasRect.localScale;
+            float realWidth = sizeDelta.x * localScale.x;
+            float realHeight = sizeDelta.y * localScale.y;
 
             Bounds minigameScreenBounds = new Bounds();
             minigameScreenBounds.center = _minigameRect.position;
             minigameScreenBounds.size =
                 new Vector3(realWidth, realHeight);
-
+            
+            Debug.Log($"TryRaycastIntoMinigame Clicked in mini game: {minigameScreenBounds.Contains(mousePos)}");
             if (!minigameScreenBounds.Contains(mousePos))
                 return null;
             
