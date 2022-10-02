@@ -7,6 +7,8 @@ TagManager:
   - RaycastHitTarget
   - Plunger
   - Toilet
+  - Plant
+  - Water
   layers:
   - Default
   - TransparentFX
