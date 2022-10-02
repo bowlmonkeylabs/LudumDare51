@@ -121,7 +121,6 @@ namespace BML.Scripts
             minigameScreenBounds.size =
                 new Vector3(realWidth, realHeight);
             
-            Debug.Log($"TryRaycastIntoMinigame Clicked in mini game: {minigameScreenBounds.Contains(mousePos)}");
             if (!minigameScreenBounds.Contains(mousePos))
                 return null;
             
