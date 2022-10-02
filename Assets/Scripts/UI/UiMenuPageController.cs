@@ -49,6 +49,7 @@ namespace BML.Scripts.UI
 
             if (_isOpen != null)
             {
+                Debug.Log("sub");
                 TryOpenPage();
                 _isOpen?.Subscribe(TryOpenPage);
             }
@@ -174,7 +175,7 @@ namespace BML.Scripts.UI
 
         private void UpdateLastSelected()
         {
-            lastSelected = eventSystem.currentSelectedGameObject;
+            lastSelected = eventSystem?.currentSelectedGameObject;
             // Debug.Log($"{this?.name} | UpdateLastSelected | {lastSelected?.name}");
         }
 

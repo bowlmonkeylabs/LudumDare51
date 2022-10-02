@@ -20,6 +20,7 @@ namespace BML.Scripts
         [Required, SerializeField] private CameraSceneReference _minigameCamera;
         [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;
         [SerializeField] private GameEvent _onCancelDrag;
+        [SerializeField] private BoolVariable _isPaused;
         private bool IsMinigameRunning => _minigameCamera.Value != null;
         
         private bool _dragging;
@@ -94,6 +95,22 @@ namespace BML.Scripts
                 _dragging = false;
                 
                 _onCancelDrag.Raise();
+            }
+        }
+
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            _isPaused.Value = !_isPaused.Value;
+
+            if (_isPaused.Value)
+            {
+                Time.timeScale = 0f;
+                AudioListener.pause = true;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                AudioListener.pause = false;
             }
         }
 
