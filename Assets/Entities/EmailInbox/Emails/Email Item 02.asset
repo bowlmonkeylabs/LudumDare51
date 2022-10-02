@@ -17,4 +17,4 @@ MonoBehaviour:
   Body: Help! My toaster isn't working!
   IsSpam: 0
   SpamPenalty: 0
-  MinigameScene: {fileID: 0}
+  MinigameScene: {fileID: 102900000, guid: 518cd6798a0414e4b9ac2833500a5279, type: 3}

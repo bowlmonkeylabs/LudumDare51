@@ -17,6 +17,7 @@ namespace EmailInbox
         [Required, SerializeField] private TMP_Text _textFromAddress;
         [Required, SerializeField] private TMP_Text _textSubject;
         [Required, SerializeField] private TMP_Text _textBody;
+        [Required, SerializeField] private Canvas _parentCanvas;
 
         #endregion
 
@@ -51,7 +52,7 @@ namespace EmailInbox
         private void RenderEmailData()
         {
             var showThisObject = (_emailData != null);
-            this.gameObject.SetActive(showThisObject);
+            _parentCanvas.enabled = showThisObject;
             
             if (!showThisObject) return;
 
