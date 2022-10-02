@@ -85,9 +85,9 @@ namespace EmailInbox
                 {
                     SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
                 }
-                catch (Exception e)
+                catch
                 {
-                    
+                    // ignored
                 }
             }
             if (removeFromInbox)
