@@ -44,13 +44,13 @@ namespace EmailInbox
         
         private void RenderList()
         {
-            bool inboxItemsExceedsAvailableItems = (_inboxState.InboxItems.Length > _children.Count);
+            bool inboxItemsExceedsAvailableItems = (_inboxState.InboxItems.Count > _children.Count);
             if (inboxItemsExceedsAvailableItems)
             {
                 throw new Exception($"Not enough list items to render all emails. Please add more.");
             }
 
-            for (int i = 0; i < _inboxState.InboxItems.Length; i++)
+            for (int i = 0; i < _inboxState.InboxItems.Count; i++)
             {
                 var child = _children[i];
                 child.EmailData = _inboxState.InboxItems[i];

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using BML.ScriptableObjectCore.Scripts.Variables;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,9 +11,9 @@ namespace EmailInbox
     {
         #region Inspector
 
-        [InlineEditor] public EmailItem[] InboxItems;
+        [InlineEditor] public List<EmailItem> InboxItems;
 
-        public int TotalInboxItems => InboxItems.Length;
+        public int TotalInboxItems => InboxItems.Count;
         public int InboxTaskItems => InboxItems.Count(e => !e.IsSpam);
         public int InboxSpamItems => InboxItems.Count(e => e.IsSpam);
 
