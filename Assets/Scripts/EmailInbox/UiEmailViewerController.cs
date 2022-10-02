@@ -75,9 +75,16 @@ namespace EmailInbox
         {
             if (_emailData != null)
             {
+                bool alreadyOpen = (_emailData.Value.InstanceId == emailInstanceData.InstanceId);
+                if (alreadyOpen)
+                {
+                    return;
+                }
+                
                 CloseEmail(_lastMinigameSuccess.Value);
             }
-            
+
+            _lastMinigameSuccess.Value = false;
             _emailData = emailInstanceData;
             
             RenderEmailData();

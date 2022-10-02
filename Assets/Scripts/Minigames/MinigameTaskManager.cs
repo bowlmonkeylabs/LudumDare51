@@ -149,6 +149,7 @@ namespace BML.Scripts
         {
             Debug.Log($"Minigame ENDED");
             
+            _minigameSucceeded.Value = true;
             _onMinigameEnded.Raise();
         }
 
