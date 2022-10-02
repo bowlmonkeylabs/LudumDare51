@@ -81,7 +81,7 @@ namespace EmailInbox
                     return;
                 }
                 
-                CloseEmail(_lastMinigameSuccess.Value);
+                CloseEmail(_lastMinigameSuccess.Value, _lastMinigameSuccess.Value);
             }
 
             _lastMinigameSuccess.Value = false;
@@ -90,13 +90,18 @@ namespace EmailInbox
             RenderEmailData();
         }
         
-        public void CloseEmail(bool removeFromInbox)
+        public void CloseEmail(bool removeFromInbox, bool countAsFinishedItem)
         {
             CloseMinigame();
             
-            if (removeFromInbox)
+            if (removeFromInbox && _emailData != null)
             {
-                _onCloseEmail.Raise(_emailData);
+                var payload = new RemoveEmailInstancePayload
+                {
+                    EmailInstance = _emailData.Value,
+                    CountAsFinishedItem = countAsFinishedItem,
+                };
+                _onCloseEmail.Raise(payload);
             }
             
             _emailData = null;
@@ -125,7 +130,7 @@ namespace EmailInbox
             if (_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyAcceptSpam?.Invoke();
-                CloseEmail(true);
+                CloseEmail(true, false);
                 return;
             }
             
@@ -142,12 +147,12 @@ namespace EmailInbox
             if (!_emailData.Value.EmailData.IsSpam)
             {
                 _onPenaltyRejectTask?.Invoke();
-                CloseEmail(true);
+                CloseEmail(true, false);
                 return;
             }
             
             _onSuccessRejectSpam?.Invoke();
-            CloseEmail(true);
+            CloseEmail(true, true);
         }
 
         #endregion
@@ -193,7 +198,7 @@ namespace EmailInbox
         {
             _onMinigameEndedCallback?.Invoke();
             
-            CloseEmail(_lastMinigameSuccess.Value);
+            CloseEmail(_lastMinigameSuccess.Value, _lastMinigameSuccess.Value);
         }
         
         #endregion

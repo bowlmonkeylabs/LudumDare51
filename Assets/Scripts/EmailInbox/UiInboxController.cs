@@ -102,29 +102,29 @@ namespace EmailInbox
 
         private void RemoveEmailDynamic(object previousValue, object currentValue)
         {
-            var payload = currentValue as EmailInstancePayload?;
+            var payload = currentValue as RemoveEmailInstancePayload?;
             if (payload == null) return;
 
             RemoveEmail(payload.Value);
         }
 
-        private void RemoveEmail(EmailInstancePayload emailInstanceData)
+        private void RemoveEmail(RemoveEmailInstancePayload emailInstanceData)
         {
             if (_inboxState.SelectedItem.HasValue
-                && _inboxState.SelectedItem.Value.InstanceId == emailInstanceData.InstanceId)
+                && _inboxState.SelectedItem.Value.InstanceId == emailInstanceData.EmailInstance.InstanceId)
             {
                 _inboxState.SelectedItem = null;
             }
             
             var childInstanceIndex =
-                _children.FindIndex(child => child.gameObject.GetInstanceID() == emailInstanceData.InstanceId);
+                _children.FindIndex(child => child.gameObject.GetInstanceID() == emailInstanceData.EmailInstance.InstanceId);
             if (childInstanceIndex < 0)
             {
-                Debug.Log($"EmailInboxState RemoveInboxItem {emailInstanceData.InstanceId} No index found");
+                Debug.Log($"EmailInboxState RemoveInboxItem {emailInstanceData.EmailInstance.InstanceId} No index found");
                 return;
             }
             
-            _inboxState.RemoveInboxItem(childInstanceIndex);
+            _inboxState.RemoveInboxItem(childInstanceIndex, emailInstanceData.CountAsFinishedItem);
         }
     }
 }

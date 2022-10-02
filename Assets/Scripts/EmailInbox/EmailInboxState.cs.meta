@@ -1,3 +1,15 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 403e06945dbd4e72a99219c8ef6c5790
-timeCreated: 1664645346
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _totalInboxItems: {fileID: 11400000, guid: 306a78a7273d2284e93550ed26daefe8, type: 2}
+  - _taskInboxItems: {fileID: 11400000, guid: 7af9c558c0c163847a6923c1e199f8d2, type: 2}
+  - _spamInboxItems: {fileID: 11400000, guid: 712a133c169f8f647985b4745674e8e1, type: 2}
+  - _finishedInboxItems: {fileID: 11400000, guid: 963470bf86b86d740972dfd03c0c56a6, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -20,6 +20,7 @@ namespace EmailInbox
         [SerializeField] private IntVariable _totalInboxItems;
         [SerializeField] private IntVariable _taskInboxItems;
         [SerializeField] private IntVariable _spamInboxItems;
+        [SerializeField] private IntVariable _finishedInboxItems;
 
         public int TotalInboxItems => InboxItems.Count;
         public int TaskInboxItems => InboxItems.Count(e => !e.IsSpam);
@@ -38,6 +39,7 @@ namespace EmailInbox
 
         public void MonoBehaviourAwake()
         {
+            _finishedInboxItems.Value = 0;
             UpdateCounts();
         }
 
@@ -57,8 +59,13 @@ namespace EmailInbox
             OnUpdateInboxItems?.Invoke();
         }
 
-        public void RemoveInboxItem(int index)
+        public void RemoveInboxItem(int index, bool countAsFinishedItem)
         {
+            if (countAsFinishedItem  && _finishedInboxItems != null)
+            {
+                _finishedInboxItems.Value += 1;
+            }
+            
             InboxItems.RemoveAt(index);
             UpdateCounts();
             OnUpdateInboxItems?.Invoke();

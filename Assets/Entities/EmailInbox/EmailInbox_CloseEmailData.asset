@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: EmailInbox_CloseEmailData
   m_EditorClassIdentifier: 
   Description: "This dynamic game event expects an argument of type:\n\npublic struct
-    OpenEmailPayload\r\n{\r\n    public int Guid;\r\n    public EmailItem EmailData;\r\n}"
+    RemoveEmailInstancePayload\r\n{\r\n    public EmailInstancePayload EmailInstance;\r\n   
+    public bool CountAsFinishedItem;\r\n}"
