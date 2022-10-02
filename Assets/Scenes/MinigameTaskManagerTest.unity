@@ -520,7 +520,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 77060720}
         m_TargetAssemblyTypeName: BML.Scripts.MinigameTaskEvent, BML.Scripts
-        m_MethodName: Raise
+        m_MethodName: CheckIsCurrentTask
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1323,7 +1323,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213770638}
         m_TargetAssemblyTypeName: BML.Scripts.MinigameTaskEvent, BML.Scripts
-        m_MethodName: Raise
+        m_MethodName: CheckIsCurrentTask
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1823,7 +1823,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1862469560}
         m_TargetAssemblyTypeName: BML.Scripts.MinigameTaskEvent, BML.Scripts
-        m_MethodName: Raise
+        m_MethodName: CheckIsCurrentTask
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

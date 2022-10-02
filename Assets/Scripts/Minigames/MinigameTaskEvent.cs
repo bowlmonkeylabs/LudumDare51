@@ -10,12 +10,25 @@ namespace BML.Scripts
         [SerializeField] private UnityEvent _onIsCurrentTask;
         [SerializeField] private UnityEvent _onIsNotCurrentTask;
 
-        public void Raise()
+        public void CheckIsCurrentTask()
         {
             if (_task.isCurrentTask)
                 _onIsCurrentTask.Invoke();
             else
                 _onIsNotCurrentTask.Invoke();
+        }
+
+        public bool TryRaiseSuccess()
+        {
+            if (_task.isCurrentTask)
+            {
+                _task.InvokeOnSuccess();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

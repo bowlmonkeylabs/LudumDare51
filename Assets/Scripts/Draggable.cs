@@ -56,6 +56,11 @@ namespace BML.Scripts {
             }
         }
 
+        public void Reset()
+        {
+            transform.position = _dragStart;
+        }
+
         void Update() {
             if(_dragging) {
                 transform.position = getMouseWorldPositionOnTransformLevel() + _dragOffset;

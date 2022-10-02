@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e25ea6b6acf4d78910364cd75eae87d, type: 3}
-  m_Name: MinigameTask_TestMinigame_ClickButton3
+  m_Name: Task_TestMinigame_ClickButton2
   m_EditorClassIdentifier: 
   isCurrentTask: 0
-  _taskText: Click Button 3
-  _successEvent: {fileID: 11400000, guid: 25aaa8bed8bed164cac09d1a24341b30, type: 2}
+  _taskText: Click Button 2
+  _successEvent: {fileID: 11400000, guid: 9620bb9fddc5c0643bbd881263474d3d, type: 2}

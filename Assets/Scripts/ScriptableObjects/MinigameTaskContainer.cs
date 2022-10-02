@@ -11,6 +11,8 @@ namespace BML.Scripts.ScriptableObjects
     public class MinigameTaskContainer : ScriptableObject
     {
         public float _timeToComplete = 5f;
+        public string _winText = "You Win!";
+        public string _loseText = "You Lose!";
         public List<MinigameTask> _minigameTasks = new List<MinigameTask>();
     }
 }

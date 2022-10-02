@@ -10,6 +10,15 @@ namespace BML.Scripts.ScriptableObjects
     {
         public bool isCurrentTask;
         public string _taskText;
-        public GameEvent _successEvent;
+
+        public delegate void OnSuccess();
+        public event OnSuccess onSuccess;
+
+        public void SubscribeOnSuccess(OnSuccess callback) => this.onSuccess += callback;
+
+        public void UnSubscribeOnSuccess(OnSuccess callback) => this.onSuccess -= callback;
+
+        public void InvokeOnSuccess() => this.onSuccess?.Invoke();
+        
     }
 }

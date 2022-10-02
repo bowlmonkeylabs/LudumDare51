@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd2debc55e3b9f479047b786af3e7a4, type: 3}
-  m_Name: OnSuccess_TestMinigame_ClickButton3
+  m_Script: {fileID: 11500000, guid: 1e25ea6b6acf4d78910364cd75eae87d, type: 3}
+  m_Name: Task_TestMinigame_ClickButton1
   m_EditorClassIdentifier: 
-  Description: 
+  isCurrentTask: 0
+  _taskText: Click Button 1
+  _successEvent: {fileID: 11400000, guid: 98ee7ddda7933804194bae60131bb5ff, type: 2}

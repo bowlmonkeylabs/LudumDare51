@@ -20,6 +20,10 @@ namespace BML.Scripts {
             if(context.performed) {
                 Ray clickRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit2D raycastHit = Physics2D.Raycast(clickRay.origin, clickRay.direction, Mathf.Infinity, _interactableLayerMask);
+                
+                if (raycastHit.transform == null)
+                    return;
+                
                 Clickable clickable = raycastHit.transform.GetComponent<Clickable>();
                 if(clickable != null) {
                     clickable.EmitClick();
@@ -32,22 +36,27 @@ namespace BML.Scripts {
                 _dragging = true;
                 Ray clickRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit2D raycastHit = Physics2D.Raycast(clickRay.origin, clickRay.direction, Mathf.Infinity, _interactableLayerMask);
-                if(raycastHit) {
-                    Draggable draggable = raycastHit.transform.GetComponent<Draggable>();
-                    if(draggable != null) {
-                        draggable.StartDrag();
-                    }
+                
+                if (raycastHit.transform == null)
+                    return;
+                
+                Draggable draggable = raycastHit.transform.GetComponent<Draggable>();
+                if(draggable != null) {
+                    draggable.StartDrag();
                 }
+                
             }
             if(_dragging && context.canceled) {
                 _dragging = false;
                 Ray clickRay = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 RaycastHit2D raycastHit = Physics2D.Raycast(clickRay.origin, clickRay.direction, Mathf.Infinity, _interactableLayerMask);
-                if(raycastHit) {
-                    Draggable draggable = raycastHit.transform.GetComponent<Draggable>();
-                    if(draggable != null) {
-                        draggable.EndDrag();
-                    }
+                
+                if (raycastHit.transform == null)
+                    return;
+                
+                Draggable draggable = raycastHit.transform.GetComponent<Draggable>();
+                if(draggable != null) {
+                    draggable.EndDrag();
                 }
             }
         }

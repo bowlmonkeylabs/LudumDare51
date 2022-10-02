@@ -4,6 +4,7 @@ using BML.ScriptableObjectCore.Scripts.Events;
 using BML.Scripts.ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BML.Scripts
 {
@@ -49,12 +50,12 @@ namespace BML.Scripts
             if (currentTask != null)
             {
                 // Unsubscribe previous task from success method
-                currentTask._successEvent.Unsubscribe(TaskSuccess);
+                currentTask.UnSubscribeOnSuccess(TaskSuccess);
                 currentTask.isCurrentTask = false;
             }
             
             currentTask = GetNextTask();
-            currentTask._successEvent.Subscribe(TaskSuccess);
+            currentTask.SubscribeOnSuccess(TaskSuccess);
             currentTask.isCurrentTask = true;
             
             SetTaskText();
@@ -102,6 +103,7 @@ namespace BML.Scripts
         {
             _onMinigameCompleted.Raise();
             isMiniGameStarted = false;
+            _taskText.text = _minigameTaskContainer._winText;
             CleanUp();
         }
         
@@ -109,6 +111,7 @@ namespace BML.Scripts
         {
             _onMinigameFailed.Raise();
             isMiniGameStarted = false;
+            _taskText.text = _minigameTaskContainer._loseText;
             CleanUp();
         }
 
@@ -117,7 +120,7 @@ namespace BML.Scripts
         {
             foreach (var task in Tasks)
             {
-                task._successEvent.Unsubscribe(TaskSuccess);
+                task.UnSubscribeOnSuccess(TaskSuccess);
                 task.isCurrentTask = false;
             }
         }

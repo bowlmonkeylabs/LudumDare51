@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e25ea6b6acf4d78910364cd75eae87d, type: 3}
-  m_Name: MinigameTask_TestMinigame_ClickButton1
+  m_Name: Task_PizzaMinigame_AddThePepperoni
   m_EditorClassIdentifier: 
   isCurrentTask: 0
-  _taskText: Click Button 1
-  _successEvent: {fileID: 11400000, guid: 98ee7ddda7933804194bae60131bb5ff, type: 2}
+  _taskText: Add The Pepperoni
