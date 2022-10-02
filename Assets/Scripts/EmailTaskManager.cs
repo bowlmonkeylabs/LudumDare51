@@ -19,7 +19,7 @@ namespace BML.Scripts {
 
         #region Unity lifecycle
 
-        void OnAwake() {
+        void Awake() {
             _spamEmails = _emailItems.Where(emailItem => {
                 return emailItem.IsSpam;
             }).ToList();
@@ -61,10 +61,10 @@ namespace BML.Scripts {
                 if(addSpamCount > 0 && addEmailCount > 0) {
                     bool chooseSpam = UnityEngine.Random.value > 0.5 ? true : false;
                     if(chooseSpam) {
-                        _inboxState.InboxItems.Add(_emailItems[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
+                        _inboxState.InboxItems.Add(_spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
                         addSpamCount--;
                     } else {
-                        _inboxState.InboxItems.Add(_emailItems[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
+                        _inboxState.InboxItems.Add(_taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
                         addEmailCount--;
                     }
 
@@ -72,12 +72,12 @@ namespace BML.Scripts {
                 }
 
                 if(addEmailCount > 0) {
-                    _inboxState.InboxItems.Add(_emailItems[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
+                    _inboxState.InboxItems.Add(_taskEmails[UnityEngine.Random.Range(0, _taskEmails.Count - 1)]);
                     addEmailCount--;
                     continue;
                 }
 
-                _inboxState.InboxItems.Add(_emailItems[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
+                _inboxState.InboxItems.Add(_spamEmails[UnityEngine.Random.Range(0, _spamEmails.Count - 1)]);
                 addSpamCount--;
             }
 
