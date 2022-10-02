@@ -45,7 +45,6 @@ namespace BML.Scripts
         {
             foreach (var plant in plants)
             {
-                Debug.Log(plant.IsWatered);
                 if (!plant.IsWatered)
                     return;
             }
