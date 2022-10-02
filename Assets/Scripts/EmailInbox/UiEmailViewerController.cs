@@ -128,7 +128,7 @@ namespace EmailInbox
 
         public void OnMinigameSuccess()
         {
-            Debug.Log($"UiEmailViewerController OnMinigameSuccess");
+            // Debug.Log($"UiEmailViewerController OnMinigameSuccess");
             
             _onMinigameSuccessCallback?.Invoke();
             
@@ -138,7 +138,7 @@ namespace EmailInbox
 
         public void OnMinigameFailed()
         {
-            Debug.Log($"UiEmailViewerController OnMinigameFailed");
+            // Debug.Log($"UiEmailViewerController OnMinigameFailed");
             
             _onMinigameFailedCallback?.Invoke();
             
