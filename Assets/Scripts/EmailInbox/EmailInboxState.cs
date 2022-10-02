@@ -35,9 +35,7 @@ namespace EmailInbox
 
         public void MonoBehaviourAwake()
         {
-            if (_totalInboxItems != null) _totalInboxItems.Value = TotalInboxItems;
-            if (_taskInboxItems != null) _taskInboxItems.Value = TaskInboxItems;
-            if (_spamInboxItems != null) _spamInboxItems.Value = SpamInboxItems;
+            UpdateCounts();
         }
 
         #endregion
@@ -47,18 +45,29 @@ namespace EmailInbox
         public void AddInboxItem(EmailItem emailItem)
         {
             InboxItems.Add(emailItem);
+            UpdateCounts();
             OnUpdateInboxItems?.Invoke();
         }
 
         public void RemoveInboxItem(int index)
         {
             InboxItems.RemoveAt(index);
+            UpdateCounts();
             OnUpdateInboxItems?.Invoke();
         }
 
         public void ClearInboxItems()
         {
             InboxItems.Clear();
+            UpdateCounts();
+            OnUpdateInboxItems?.Invoke();
+        }
+
+        public void UpdateCounts()
+        {
+            if (_totalInboxItems != null) _totalInboxItems.Value = TotalInboxItems;
+            if (_taskInboxItems != null) _taskInboxItems.Value = TaskInboxItems;
+            if (_spamInboxItems != null) _spamInboxItems.Value = SpamInboxItems;
         }
 
         #endregion
