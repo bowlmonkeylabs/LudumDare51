@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FromAddress: site@generic.org
   Subject: This deal is yours for only a LIMITED TIME
-  Body: You dont wanna miss this
+  Body: You dont wanna miss this!
   IsSpam: 1
   SpamPenalty: 0
+  MinigameSceneName: 
   MinigameScene: {fileID: 0}
