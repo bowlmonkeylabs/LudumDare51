@@ -162,14 +162,14 @@ namespace EmailInbox
 
         public void OpenMinigame()
         {
-            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameScene.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameSceneName, LoadSceneMode.Additive);
         }
 
         public void CloseMinigame()
         {
             try
             {
-                SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameScene.name);
+                SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameSceneName);
             }
             catch
             {
