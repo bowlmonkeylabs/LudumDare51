@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5963b1a3e0248d789fb6bfa7dfda4eb, type: 3}
   m_Name: AIPicture_TaskContainer
   m_EditorClassIdentifier: 
-  _timeToComplete: 30
+  _timeToComplete: 10
   _winText: You Win!
   _loseText: You Lose!
+  RandomizeTaskOrder: 0
   _minigameTasks:
   - {fileID: 11400000, guid: c5596aa1b5048b142bbdc21fab0dc4aa, type: 2}

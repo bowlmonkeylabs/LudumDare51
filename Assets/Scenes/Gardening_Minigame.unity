@@ -1057,6 +1057,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+--- !u!114 &2279465200747497881 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7280343157965541875, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+  m_PrefabInstance: {fileID: 2279465200747497880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8157121748727824272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,4 +1505,5 @@ MonoBehaviour:
   _onSuccceededFeedbacks: {fileID: 8157121748727824272}
   _onFailedFeedbacks: {fileID: 8157121748740572122}
   _taskText: {fileID: 2113132192}
+  _timerText: {fileID: 2279465200747497881}
   _minigameTaskContainer: {fileID: 11400000, guid: 82ea2418bbdea0e42a3a2f574b0856f8, type: 2}

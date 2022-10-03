@@ -49,7 +49,6 @@ namespace BML.Scripts.UI
 
             if (_isOpen != null)
             {
-                Debug.Log("sub");
                 TryOpenPage();
                 _isOpen?.Subscribe(TryOpenPage);
             }

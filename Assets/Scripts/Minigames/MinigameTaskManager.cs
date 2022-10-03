@@ -24,6 +24,7 @@ namespace BML.Scripts
         [SerializeField] private MMF_Player _onFailedFeedbacks;
         
         [SerializeField] private TMP_Text _taskText;
+        [SerializeField] private TMP_Text _timerText;
         [SerializeField] private MinigameTaskContainer _minigameTaskContainer;
 
         [ShowInInspector, ReadOnly] private List<MinigameTask> Tasks;
@@ -50,6 +51,13 @@ namespace BML.Scripts
             if (isMiniGameStarted &&
                 minigameStartTime + _minigameTaskContainer._timeToComplete < Time.time)
                 OnMinigameFailed();
+            
+            if (isMiniGameStarted)
+            {
+                float remainingTime = Mathf.Max(0f,
+                    _minigameTaskContainer._timeToComplete - (Time.time - minigameStartTime));
+                _timerText.text = remainingTime.ToString("0.0");
+            }
         }
 
         #endregion

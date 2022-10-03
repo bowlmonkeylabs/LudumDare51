@@ -541,7 +541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &132087606
 PrefabInstance:
@@ -827,7 +827,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &250475212
 GameObject:
@@ -1689,13 +1689,13 @@ Transform:
   m_LocalPosition: {x: 583, y: 328, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 932058182}
   - {fileID: 1856031093}
   - {fileID: 674053823}
   - {fileID: 866220989}
   - {fileID: 1383726258}
   - {fileID: 178495755}
   - {fileID: 108750509}
-  - {fileID: 932058182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4693,7 +4693,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &674053824
 MonoBehaviour:
@@ -4708,54 +4708,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialDelay: 0
-  _numEmails:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 2
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 4
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _spamWeighting:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.5
-      inSlope: -0.19999999
-      outSlope: -0.19999999
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0.3
-      inSlope: -0.19999999
-      outSlope: -0.19999999
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _emailTimer: {fileID: 11400000, guid: ce572e81da67fce429b4702e346f4d1f, type: 2}
   _gameTimer: {fileID: 11400000, guid: b9fe2da6658a85548b37447cbb6953c9, type: 2}
   _inboxState: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
@@ -4766,9 +4718,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae8beaac318bc964cb9be09a7ceed750, type: 2}
   - {fileID: 11400000, guid: 0073fd0050defe7448c7ee277727af96, type: 2}
   - {fileID: 11400000, guid: f7b7ccd391a4c0243bc7245321360ded, type: 2}
-  - {fileID: 11400000, guid: 5d1f098f8778f674b8311d1e9d3e828a, type: 2}
-  - {fileID: 11400000, guid: d629cfd1ef7fc484192cbb9ae5ae32c0, type: 2}
-  - {fileID: 11400000, guid: 661f392fd2245584b8af99f9e57aebc9, type: 2}
 --- !u!1 &684820452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5937,10 +5886,10 @@ RectTransform:
   m_Father: {fileID: 455362498}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 39.583336, y: -20.625002}
-  m_SizeDelta: {x: 79.16667, y: 41.250004}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749565339
 MonoBehaviour:
@@ -7016,7 +6965,7 @@ Transform:
   - {fileID: 603241708}
   - {fileID: 533938257}
   m_Father: {fileID: 340835523}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &866220990
 MonoBehaviour:
@@ -7614,12 +7563,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932058181}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &932058183
 MonoBehaviour:
@@ -9580,7 +9529,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -10489,7 +10438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1383726259
 MonoBehaviour:
@@ -12850,10 +12799,10 @@ RectTransform:
   m_Father: {fileID: 455362498}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 118.75001, y: -20.625002}
-  m_SizeDelta: {x: 79.16667, y: 41.250004}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1662722389
 MonoBehaviour:
@@ -13357,10 +13306,10 @@ RectTransform:
   m_Father: {fileID: 455362498}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 197.91669, y: -20.625002}
-  m_SizeDelta: {x: 79.16667, y: 41.250004}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751211059
 MonoBehaviour:
@@ -14400,7 +14349,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 340835523}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1856031094
 MonoBehaviour:
