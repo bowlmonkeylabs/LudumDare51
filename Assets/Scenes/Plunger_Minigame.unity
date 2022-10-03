@@ -552,6 +552,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2279465200166008579, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 843355242}
+    - target: {fileID: 2279465200166008579, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2279465200662862956, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_Name
       value: '[Minigame Structure]'
@@ -624,6 +632,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &843355242 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2279465199363426697, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+  m_PrefabInstance: {fileID: 843355239}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &931882985
 GameObject:
   m_ObjectHideFlags: 0

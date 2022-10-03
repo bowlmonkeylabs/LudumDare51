@@ -33,7 +33,7 @@ namespace EmailInbox
         #endregion
 
         #region Unity lifecycle
-
+        
         #endregion
         
         #region Email data
@@ -60,6 +60,11 @@ namespace EmailInbox
                 EmailData = _emailData,
             };
             _openEmail.Raise(payload);
+        }
+
+        public void UpdateColor() {
+            var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
+            _button.image.color = color;
         }
         
         #endregion

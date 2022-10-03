@@ -98,6 +98,7 @@ namespace EmailInbox
         private void OnOpenEmail(EmailInstancePayload instancePayload)
         {
             _inboxState.SelectedItem = instancePayload;
+            SetSelected();
         }
 
         private void RemoveEmailDynamic(object previousValue, object currentValue)
@@ -128,6 +129,20 @@ namespace EmailInbox
             Debug.Log($"Removing email ({emailInstanceData.EmailInstance.EmailData.Subject}) {emailInstanceData.EmailInstance.InstanceId} | Index {childInstanceIndex} | Child count {_children.Count}");
             
             _inboxState.RemoveInboxItem(childInstanceIndex, emailInstanceData.CountAsFinishedItem);
+        }
+
+        private void SetSelected() {
+            for (int i = 0; i < _children.Count; i++)
+            {
+                
+                var child = _children[i];
+                
+                var isCurrentlySelected = (_inboxState.SelectedItem.HasValue &&
+                                           _inboxState.SelectedItem.Value.InstanceId ==
+                                           child.gameObject.GetInstanceID());
+                child.IsSelected = isCurrentlySelected;
+                child.UpdateColor();
+            }
         }
     }
 }
