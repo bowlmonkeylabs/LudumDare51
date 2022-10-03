@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using EmailInbox;
 using System;
 using System.Collections.Generic;
+using BML.Scripts.Utils;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -12,6 +13,12 @@ namespace BML.Scripts {
     public class EmailTaskManager : MonoBehaviour
     {
         [SerializeField] private bool _initialDelay = false;
+        
+        [Tooltip("Control the number of emails sent over time. The x-axis is a percentage of the _gameTimer duration (Range 0-1).")]
+        [SerializeField] private AnimationCurve _numEmails;
+
+        [Tooltip("Percent chance of _numEmails being spam.")]
+        [SerializeField] private AnimationCurve _spamWeighting;
         
         [SerializeField] private TimerVariable _emailTimer;
         [SerializeField] private TimerVariable _gameTimer;
@@ -57,7 +64,7 @@ namespace BML.Scripts {
 
         #region Emails
 
-        private void QueueSpamEmailChoices()
+        private void QueueSpamEmailChoices(int min = 0)
         {
             var addItems = _emailItemChoices
                 .Where(emailItem => emailItem.IsSpam)
@@ -83,50 +90,32 @@ namespace BML.Scripts {
 
         private void OnEmailTimerFinished() 
         {
-            // Calculate how many emails of each type to add
-            int addSpamCount = UnityEngine.Random.value > 0.5 ? 1 : 0;
-            int addTaskCount = 1;
-            if ((_gameTimer.ElapsedTime / _gameTimer.Duration) >= 0.9) 
-            {
-                addTaskCount++;
-            }
-            int addTotalEmails = addTaskCount + addSpamCount;
+            // Evaluate how many emails to add and spam weighting
+            int addEmailCount = Mathf.FloorToInt(_numEmails.Evaluate(_gameTimer.ElapsedTimeFactor));
+            float spamWeighting = _spamWeighting.Evaluate(_gameTimer.ElapsedTimeFactor);
+            
+            Debug.Log($"EmailTaskManager Add emails ({addEmailCount}) ({spamWeighting} spam)");
 
-            if (addSpamCount >= _spamEmailQueue.Count)
-            {
-                QueueSpamEmailChoices();
-            }
-            if (addTaskCount >= _taskEmailQueue.Count)
-            {
-                QueueTaskEmailChoices();
-            }
+            // Fill queues if empty
+            if (addEmailCount >= _spamEmailQueue.Count) QueueSpamEmailChoices();
+            if (addEmailCount >= _taskEmailQueue.Count) QueueTaskEmailChoices();
+            
+            // Select random emails
+            var emails =
+                Enumerable.Range(0, addEmailCount)
+                    .Select(i =>
+                    {
+                        bool isSpam = (Random.value <= spamWeighting);
+                        EmailItem emailItem = isSpam
+                            ? _spamEmailQueue.SoftDequeue(1)
+                            : _taskEmailQueue.SoftDequeue(1);
+                        return emailItem;
+                    });
 
             // Add emails
-            for(var i = 0; i < addTotalEmails; i++)
+            foreach (var emailItem in emails)
             {
-                if(addSpamCount > 0 && addTaskCount > 0) 
-                {
-                    bool chooseSpam = UnityEngine.Random.value > 0.5 ? true : false;
-                    if(chooseSpam) {
-                        _inboxState.AddInboxItem(_spamEmailQueue.Dequeue());
-                        addSpamCount--;
-                    } else {
-                        _inboxState.AddInboxItem(_taskEmailQueue.Dequeue());
-                        addTaskCount--;
-                    }
-
-                    continue;
-                }
-
-                if(addTaskCount > 0)
-                {
-                    _inboxState.AddInboxItem(_taskEmailQueue.Dequeue());
-                    addTaskCount--;
-                    continue;
-                }
-
-                _inboxState.AddInboxItem(_spamEmailQueue.Dequeue());
-                addSpamCount--;
+                _inboxState.AddInboxItem(emailItem);
             }
 
             // Reset timer

@@ -4675,10 +4675,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialDelay: 0
+  _numEmails:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 4
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _spamWeighting:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: -0.19999999
+      outSlope: -0.19999999
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: -0.19999999
+      outSlope: -0.19999999
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _emailTimer: {fileID: 11400000, guid: ce572e81da67fce429b4702e346f4d1f, type: 2}
   _gameTimer: {fileID: 11400000, guid: b9fe2da6658a85548b37447cbb6953c9, type: 2}
   _inboxState: {fileID: 11400000, guid: a6304721cd2d8e14e9912ad9f97328a0, type: 2}
-  _emailItems:
+  _emailItemChoices:
   - {fileID: 11400000, guid: fc21f13deed94384882d4172cc297b42, type: 2}
   - {fileID: 11400000, guid: 8870add6dc009324aaf97ddbd699f60e, type: 2}
   - {fileID: 11400000, guid: 052ab00268d222549a0c9436200c3d94, type: 2}
@@ -13698,6 +13746,7 @@ MonoBehaviour:
   _minigameCamera: {fileID: 11400000, guid: abf4c2f9432e26845ae560907ae98400, type: 2}
   _mouseWorldPosInMinigame: {fileID: 11400000, guid: 0761dfe7e76ebed43881bf23a9986cf9, type: 2}
   _onCancelDrag: {fileID: 11400000, guid: 6e2ff0944ad380d469f5a0ad241f46be, type: 2}
+  _isPaused: {fileID: 0}
 --- !u!114 &1856031095
 MonoBehaviour:
   m_ObjectHideFlags: 0

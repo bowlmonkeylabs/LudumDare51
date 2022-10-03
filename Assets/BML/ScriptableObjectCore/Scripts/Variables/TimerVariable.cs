@@ -27,6 +27,7 @@ namespace BML.ScriptableObjectCore.Scripts.Variables
         // public float Duration => duration;
         public float? RemainingTime => remainingTime;
         public float ElapsedTime => Duration - (remainingTime ?? Duration);
+        public float ElapsedTimeFactor => ElapsedTime / Duration;
         public bool IsFinished => isFinished;
 
         public bool IsStopped => isStopped;
@@ -120,6 +121,20 @@ namespace BML.ScriptableObjectCore.Scripts.Variables
                     return ConstantDuration - (ConstantRemainingTime ?? ConstantDuration);
                 if (Variable != null)
                     return Variable.ElapsedTime;
+                
+                Debug.LogError("Trying to access elapsed time for timer variable that is not set!");
+                return Mathf.Infinity;
+            }
+        }
+
+        public float ElapsedTimeFactor
+        {
+            get
+            {
+                if (UseConstant)
+                    return (ConstantDuration - (ConstantRemainingTime ?? ConstantDuration)) / ConstantDuration;
+                if (Variable != null)
+                    return Variable.ElapsedTimeFactor;
                 
                 Debug.LogError("Trying to access elapsed time for timer variable that is not set!");
                 return Mathf.Infinity;
