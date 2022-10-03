@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BowlMonkey
   m_EditorClassIdentifier: 
   Prompt: Identify the Bowl Monkey
-  CorrectImage: {fileID: 21300000, guid: 3fafa7ab3bafd914d8e2c25cccb3e95e, type: 3}
+  CorrectImage: {fileID: 21300000, guid: 08b9f9888de363640a8b38eb4edc2d8a, type: 3}
   WrongImages:
-  - {fileID: 21300000, guid: 08b9f9888de363640a8b38eb4edc2d8a, type: 3}
+  - {fileID: 21300000, guid: 2ad96f8b40809f94ab36ac16c494236e, type: 3}
   - {fileID: 21300000, guid: e6ee9ef2ad6121343ab8e71843189160, type: 3}

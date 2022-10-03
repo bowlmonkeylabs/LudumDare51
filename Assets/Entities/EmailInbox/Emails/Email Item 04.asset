@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
   m_Name: Email Item 04
   m_EditorClassIdentifier: 
-  FromAddress: clogged@toilet.com
+  FromAddress: ailab@research.com
   Subject: AI Analysis Required!
-  Body: HELP!
+  Body: We need you help train our AI! Identify the correct image.
   IsSpam: 0
   SpamPenalty: 0
+  MinigameSceneName: AIPicture_Minigame
   MinigameScene: {fileID: 102900000, guid: a8c21806bd6dee044849320fbf0bf4b2, type: 3}
