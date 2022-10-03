@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item_Game 05
+  m_Name: Email Item_Game 09
   m_EditorClassIdentifier: 
-  FromAddress: blackthumb@helpme.org
-  Subject: Plants need water?!?
-  Body: Can someone please show me how on earth to water plants?
+  FromAddress: childsit@business.com
+  Subject: Our Son Needs Help
+  Body: Little Billy has been eating dirt again, can you clean out his mouth?
   IsSpam: 0
   SpamPenalty: 0
-  MinigameSceneName: Gardening_Minigame
-  MinigameScene: {fileID: 102900000, guid: f3c686cfd0c0ef346a36bf8f4bc2fd7b, type: 3}
+  MinigameSceneName: BrushTeeth_Minigame
+  MinigameScene: {fileID: 102900000, guid: fb2d2dfc96f484e4e9a955950f0a4672, type: 3}

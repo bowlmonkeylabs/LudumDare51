@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FromAddress: ailab@research.com
   Subject: AI Analysis Required!
-  Body: We need you help train our AI! Identify the correct image.
+  Body: We need your help train our AI! Identify the correct image.
   IsSpam: 0
   SpamPenalty: 0
   MinigameSceneName: AIPicture_Minigame
