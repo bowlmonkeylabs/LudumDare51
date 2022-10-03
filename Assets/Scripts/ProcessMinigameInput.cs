@@ -5,6 +5,7 @@ using BML.ScriptableObjectCore.Scripts.SceneReferences;
 using BML.ScriptableObjectCore.Scripts.Variables;
 using BML.Scripts.Utils;
 using Sirenix.OdinInspector;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -66,7 +67,7 @@ namespace BML.Scripts
             
             if (context.performed)
             {
-                GameObject hitObj = TryRaycastIntoMinigame();
+                GameObject hitObj = TryRaycastIntoMinigame(_hitMask);
                 if (hitObj == null)
                     return;
             
@@ -84,7 +85,7 @@ namespace BML.Scripts
             if(context.performed) {
                 _dragging = true;
                 
-                GameObject hitObj = TryRaycastIntoMinigame();
+                GameObject hitObj = TryRaycastIntoMinigame(_hitMask);
                 if (hitObj == null)
                     return;
                 
@@ -119,7 +120,7 @@ namespace BML.Scripts
 
         #endregion
 
-        private GameObject TryRaycastIntoMinigame()
+        public GameObject TryRaycastIntoMinigame(LayerMask layerMask)
         {
             Vector3 mousePos = Mouse.current.position.ReadValue();
             RaycastResult uiRaycast = UIRaycast(ScreenPosToPointerData(mousePos));
@@ -161,7 +162,7 @@ namespace BML.Scripts
             {
                 GameObject hitObj = hit.collider.gameObject;
                 // Debug.Log($"Hit object in additive scene: {hitObj.name}");
-                if (hitObj.IsInLayerMask(_hitMask))
+                if (hitObj.IsInLayerMask(layerMask))
                 {
                     // Debug.Log("Hit object belongs to hit layermask");
                     return hitObj;
@@ -171,7 +172,7 @@ namespace BML.Scripts
             return null;
         }
 
-        static RaycastResult UIRaycast (PointerEventData pointerData)
+        public static RaycastResult UIRaycast (PointerEventData pointerData)
         {
             var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
@@ -179,7 +180,7 @@ namespace BML.Scripts
             return results.Count < 1 ? new RaycastResult() : results[0];
         }
 
-        static PointerEventData ScreenPosToPointerData(Vector2 screenPos)
+        public static PointerEventData ScreenPosToPointerData(Vector2 screenPos)
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
             pointerEventData.position = screenPos;
