@@ -37,6 +37,12 @@ namespace BML.Scripts
             int randomIndex = Random.Range(0, _plaqueSpotsModify.Count);
             _plaqueSpotsModify[randomIndex].SetActive(false);
             _plaqueSpotsModify.RemoveAt(randomIndex);
+            
+            if (_plaqueSpotsModify.Count == 0)
+            {
+                SetCleaned();
+                return;
+            }
         }
 
         public void SetCleaned()

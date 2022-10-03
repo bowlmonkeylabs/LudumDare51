@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,14 +20,25 @@ namespace EmailInbox
         [ShowIf("$IsSpam")]
         [Required] public int SpamPenalty;
         
+        [HideIf("$IsSpawm")]
+        [Required] public string MinigameSceneName;
+        
+        #if UNITY_EDITOR
         [HideIf("$IsSpam")]
         [Required] public SceneAsset MinigameScene;
+        #endif
 
         #endregion
 
         #region Unity lifecycle
-        
-        
+
+        #if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (MinigameScene != null)
+                MinigameSceneName = MinigameScene.name;
+        }
+        #endif
 
         #endregion
     }
