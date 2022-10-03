@@ -22,7 +22,7 @@ namespace BML.Scripts
             for (int i = 0; i < _plaqueCount; i++)
             {
                 int randIndex = Random.Range(0, spawnPointTemp.Count);
-                GameObject plant = Instantiate(_plaquePrefab, spawnPointTemp[randIndex]);
+                GameObject plant = Instantiate(_plaquePrefab, spawnPointTemp[randIndex].position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
                 plaques.Add(plant.GetComponent<Plaque>());
                 spawnPointTemp.Remove(spawnPointTemp[randIndex]);
             }
