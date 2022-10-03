@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
+  m_Name: Dessert
+  m_EditorClassIdentifier: 
+  Prompt: Identify the Dessert
+  CorrectImage: {fileID: 21300000, guid: 5837ca56bbc4fa7409b6ac777d1ffbb8, type: 3}
+  WrongImages:
+  - {fileID: 21300000, guid: 24fa379c446f9eb4e8673a345ba914e1, type: 3}
+  - {fileID: 21300000, guid: 675c482ca39cd3742a9ff22ff19eefa4, type: 3}
