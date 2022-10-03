@@ -1,12 +1,16 @@
-﻿namespace EmailInbox
+﻿using System;
+
+namespace EmailInbox
 {
-    public struct EmailInstancePayload
+    [Serializable]
+    public class EmailInstancePayload
     {
         public int InstanceId;
         public EmailItem EmailData;
     }
 
-    public struct RemoveEmailInstancePayload
+    [Serializable]
+    public class RemoveEmailInstancePayload
     {
         public EmailInstancePayload EmailInstance;
         public bool CountAsFinishedItem;

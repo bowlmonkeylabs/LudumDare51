@@ -15,7 +15,17 @@ namespace EmailInbox
 
         [InlineEditor] public List<EmailItem> InboxItems;
 
-        [InlineEditor, ReadOnly] public EmailInstancePayload? SelectedItem;
+        [HideInInspector]
+        public EmailInstancePayload SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                OnSelectionChanged?.Invoke();
+            }
+        }
+        [InlineEditor, SerializeField, ReadOnly] private EmailInstancePayload _selectedItem;
 
         [SerializeField] private IntVariable _totalInboxItems;
         [SerializeField] private IntVariable _taskInboxItems;
@@ -30,8 +40,14 @@ namespace EmailInbox
 
         #region Events
 
-        public delegate void UpdateInboxItems();
-        public event UpdateInboxItems OnUpdateInboxItems;
+        public delegate void AddInboxItems();
+        public event AddInboxItems OnAddInboxItems;
+        
+        public delegate void RemoveInboxItems();
+        public event RemoveInboxItems OnRemoveInboxItems;
+        
+        public delegate void SelectionChanged();
+        public event SelectionChanged OnSelectionChanged;
 
         #endregion
 
@@ -56,7 +72,7 @@ namespace EmailInbox
         {
             InboxItems.Add(emailItem);
             UpdateCounts();
-            OnUpdateInboxItems?.Invoke();
+            OnAddInboxItems?.Invoke();
         }
 
         public void RemoveInboxItem(int index, bool countAsFinishedItem)
@@ -68,15 +84,16 @@ namespace EmailInbox
             
             InboxItems.RemoveAt(index);
             UpdateCounts();
-            OnUpdateInboxItems?.Invoke();
+            OnRemoveInboxItems?.Invoke();
         }
 
         public void ClearInboxItems()
         {
+            Debug.Log($"Clear inbox items");
             InboxItems.Clear();
             SelectedItem = null;
             UpdateCounts();
-            OnUpdateInboxItems?.Invoke();
+            OnRemoveInboxItems?.Invoke();
         }
 
         public void UpdateCounts()

@@ -25,6 +25,12 @@ namespace BML.Scripts {
         [Required, SerializeField] private EmailInboxState _inboxState;
         [FormerlySerializedAs("_emailItems")] [SerializeField] private List<EmailItem> _emailItemChoices;
 
+        #if UNITY_EDITOR
+        [SerializeField] private bool _pauseEmails = false;
+        #else
+        private bool _pauseEmails = false;
+        #endif
+        
         private Queue<EmailItem> _spamEmailQueue;
         private Queue<EmailItem> _taskEmailQueue;
 
@@ -32,6 +38,7 @@ namespace BML.Scripts {
 
         void Awake() 
         {
+            Debug.Log($"EmailTaskManager Awake");
             _inboxState.ClearInboxItems();
 
             _spamEmailQueue = new Queue<EmailItem>();
@@ -90,6 +97,13 @@ namespace BML.Scripts {
 
         private void OnEmailTimerFinished() 
         {
+            if (_pauseEmails)
+            {
+                _emailTimer.ResetTimer();
+                _emailTimer.StartTimer();
+                return;
+            }
+            
             // Evaluate how many emails to add and spam weighting
             int addEmailCount = Mathf.FloorToInt(_numEmails.Evaluate(_gameTimer.ElapsedTimeFactor));
             float spamWeighting = _spamWeighting.Evaluate(_gameTimer.ElapsedTimeFactor);

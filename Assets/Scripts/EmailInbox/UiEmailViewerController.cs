@@ -65,19 +65,22 @@ namespace EmailInbox
 
         private void OnOpenEmailDynamic(object prevValue, object currentValue)
         {
-            var payload = currentValue as EmailInstancePayload?;
+            var payload = currentValue as EmailInstancePayload;
             if (payload == null) return;
             
-            OnOpenEmail(payload.Value);
+            OnOpenEmail(payload);
         }
 
         private void OnOpenEmail(EmailInstancePayload emailInstanceData)
         {
+            Debug.Log($"OnOpenEmail Try open {emailInstanceData.InstanceId}");
+            
             if (_emailData != null)
             {
-                bool alreadyOpen = (_emailData.Value.InstanceId == emailInstanceData.InstanceId);
+                bool alreadyOpen = (_emailData.InstanceId == emailInstanceData.InstanceId);
                 if (alreadyOpen)
                 {
+                    Debug.Log($"OnOpenEmail Already open {_emailData.InstanceId}");
                     return;
                 }
                 
@@ -98,10 +101,10 @@ namespace EmailInbox
             {
                 var payload = new RemoveEmailInstancePayload
                 {
-                    EmailInstance = _emailData.Value,
+                    EmailInstance = _emailData,
                     CountAsFinishedItem = countAsFinishedItem,
                 };
-                Debug.Log($"Requesting to close email ({_emailData.Value.EmailData.Subject}) {_emailData.Value.InstanceId}");
+                Debug.Log($"Requesting to close email ({_emailData.EmailData.Subject}) {_emailData.InstanceId}");
                 _onCloseEmail.Raise(payload);
             }
             
@@ -117,9 +120,9 @@ namespace EmailInbox
             
             if (!showThisObject) return;
 
-            _textFromAddress.text = _emailData.Value.EmailData.FromAddress;
-            _textSubject.text = _emailData.Value.EmailData.Subject;
-            _textBody.text = _emailData.Value.EmailData.Body;
+            _textFromAddress.text = _emailData.EmailData.FromAddress;
+            _textSubject.text = _emailData.EmailData.Subject;
+            _textBody.text = _emailData.EmailData.Body;
         }
 
         public void OnClickAccept()
@@ -128,7 +131,7 @@ namespace EmailInbox
             {
                 return;
             }
-            if (_emailData.Value.EmailData.IsSpam)
+            if (_emailData.EmailData.IsSpam)
             {
                 _onPenaltyAcceptSpam?.Invoke();
                 CloseEmail(true, false);
@@ -141,11 +144,13 @@ namespace EmailInbox
 
         public void OnClickReject()
         {
+            Debug.Log($"OnClickReject");
+            
             if (_emailData == null)
             {
                 return;
             }
-            if (!_emailData.Value.EmailData.IsSpam)
+            if (!_emailData.EmailData.IsSpam)
             {
                 _onPenaltyRejectTask?.Invoke();
                 CloseEmail(true, false);
@@ -162,14 +167,14 @@ namespace EmailInbox
 
         public void OpenMinigame()
         {
-            SceneManager.LoadScene(_emailData.Value.EmailData.MinigameSceneName, LoadSceneMode.Additive);
+            SceneManager.LoadScene(_emailData.EmailData.MinigameSceneName, LoadSceneMode.Additive);
         }
 
         public void CloseMinigame()
         {
             try
             {
-                SceneManager.UnloadSceneAsync(_emailData.Value.EmailData.MinigameSceneName);
+                SceneManager.UnloadSceneAsync(_emailData.EmailData.MinigameSceneName);
             }
             catch
             {

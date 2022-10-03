@@ -15,7 +15,7 @@ namespace EmailInbox
 
         [Required, SerializeField] private EmailInboxState _inboxState;
         [Required, SerializeField] private Transform _listContainer;
-        // [Required, SerializeField] private GameObject _emailItemPreviewPrefab;
+        [Required, SerializeField] private GameObject _emailItemPreviewPrefab;
 
         [Required, SerializeField] private DynamicGameEvent _onOpenEmail;
         [Required, SerializeField] private DynamicGameEvent _onCloseEmail;
@@ -30,23 +30,38 @@ namespace EmailInbox
 
         private void Awake()
         {
+            Debug.Log("UiInboxController Awake");
             _inboxState.MonoBehaviourAwake();
             
             // Discover child email preview child objects
-            _children.Clear();
+            // _children.Clear();
+            // for (int i = 0; i < _listContainer.childCount; i++)
+            // {
+            //     var child = _listContainer.GetChild(i);
+            //     var item = child.GetComponent<UiInboxItemController>();
+            //     if (item == null) continue;
+            //
+            //     item.EmailData = null;
+            //     _children.Add(item);
+            // }
+            // GENERATE CHILDREN AT RUNTIME INSTEAD FOR UNIQUE INSTANCE IDS
             for (int i = 0; i < _listContainer.childCount; i++)
             {
                 var child = _listContainer.GetChild(i);
-                var item = child.GetComponent<UiInboxItemController>();
-                if (item == null) continue;
-
-                item.EmailData = null;
-                _children.Add(item);
+                GameObject.Destroy(child.gameObject);
+            }
+            _children.Clear();
+            for (int i = 0; i < _inboxState.InboxItems.Count; i++)
+            {
+                var newChild = GameObject.Instantiate(_emailItemPreviewPrefab, _listContainer);
+                var newChildController = newChild.GetComponent<UiInboxItemController>();
+                newChildController.EmailData = _inboxState.InboxItems[i];
+                newChildController.IsSelected = false;
+                _children.Add(newChildController);
             }
             
-            
-            RenderList();
-            _inboxState.OnUpdateInboxItems += RenderList;
+            _inboxState.OnAddInboxItems += OnAddInboxItems;
+            _inboxState.OnSelectionChanged += SetSelectedInboxItem;
             _onOpenEmail.Subscribe(OnOpenEmailDynamic);
             _onCloseEmail.Subscribe(RemoveEmailDynamic);
         }
@@ -55,7 +70,8 @@ namespace EmailInbox
         {
             _inboxState.MonoBehaviourOnDestroy();
             
-            _inboxState.OnUpdateInboxItems -= RenderList;
+            _inboxState.OnAddInboxItems -= OnAddInboxItems;
+            _inboxState.OnSelectionChanged -= SetSelectedInboxItem;
             _onOpenEmail.Unsubscribe(OnOpenEmailDynamic);
             _onCloseEmail.Unsubscribe(RemoveEmailDynamic);
         }
@@ -64,38 +80,18 @@ namespace EmailInbox
         
         #region UI control
         
-        private void RenderList()
+        private void OnAddInboxItems()
         {
-            bool inboxItemsExceedsAvailableItems = (_inboxState.InboxItems.Count > _children.Count);
-            if (inboxItemsExceedsAvailableItems)
-            {
-                throw new Exception($"Not enough list items to render all emails. Please add more.");
-            }
+            int numAdded = _inboxState.InboxItems.Count - _children.Count;
+            if (numAdded <= 0) return;
 
-            bool anySelected = false;
-            for (int i = 0; i < _children.Count; i++)
+            for (int i = _children.Count; i < _inboxState.InboxItems.Count; i++)
             {
-                
-                var child = _children[i];
-                var emailData = (i < _inboxState.InboxItems.Count)
-                    ? _inboxState.InboxItems[i]
-                    : null;
-                child.EmailData = emailData;
-                
-                var isCurrentlySelected = (_inboxState.SelectedItem.HasValue &&
-                                           _inboxState.SelectedItem.Value.InstanceId ==
-                                           child.gameObject.GetInstanceID());
-                child.IsSelected = isCurrentlySelected;
-                if (isCurrentlySelected)
-                {
-                    anySelected = true;
-                    _eventSystem.SetSelectedGameObject(child.gameObject);
-                }
-            }
-
-            if (!anySelected)
-            {
-                _eventSystem.SetSelectedGameObject(null);
+                var newChild = GameObject.Instantiate(_emailItemPreviewPrefab, _listContainer);
+                var newChildController = newChild.GetComponent<UiInboxItemController>();
+                newChildController.EmailData = _inboxState.InboxItems[i];
+                newChildController.IsSelected = false;
+                _children.Add(newChildController);
             }
         }
         
@@ -103,37 +99,31 @@ namespace EmailInbox
         
         private void OnOpenEmailDynamic(object previousValue, object currentValue)
         {
-            var payload = currentValue as EmailInstancePayload?;
+            var payload = currentValue as EmailInstancePayload;
             if (payload == null) return;
 
-            OnOpenEmail(payload.Value);
+            OnOpenEmail(payload);
         }
 
         private void OnOpenEmail(EmailInstancePayload instancePayload)
         {
             _inboxState.SelectedItem = instancePayload;
-            SetSelected();
+            // SetSelectedInboxItem();
         }
 
         private void RemoveEmailDynamic(object previousValue, object currentValue)
         {
-            var payload = currentValue as RemoveEmailInstancePayload?;
+            var payload = currentValue as RemoveEmailInstancePayload;
             if (payload == null) return;
 
-            Debug.Log($"Removing email ({payload.Value.EmailInstance.EmailData.Subject}) {payload.Value.EmailInstance.InstanceId}");
-            RemoveEmail(payload.Value);
+            Debug.Log($"Removing email ({payload.EmailInstance.EmailData.Subject}) {payload.EmailInstance.InstanceId}");
+            RemoveEmail(payload);
         }
 
         private void RemoveEmail(RemoveEmailInstancePayload emailInstanceData)
         {
-            if (_inboxState.SelectedItem.HasValue
-                && _inboxState.SelectedItem.Value.InstanceId == emailInstanceData.EmailInstance.InstanceId)
-            {
-                _inboxState.SelectedItem = null;
-            }
-            
             var childInstanceIndex =
-                _children.FindIndex(child => child.gameObject.GetInstanceID() == emailInstanceData.EmailInstance.InstanceId);
+                _children.FindIndex(child => child.GetInstanceID() == emailInstanceData.EmailInstance.InstanceId);
             if (childInstanceIndex < 0)
             {
                 Debug.Log($"EmailInboxState RemoveInboxItem {emailInstanceData.EmailInstance.InstanceId} No index found");
@@ -142,10 +132,21 @@ namespace EmailInbox
             
             Debug.Log($"Removing email ({emailInstanceData.EmailInstance.EmailData.Subject}) {emailInstanceData.EmailInstance.InstanceId} | Index {childInstanceIndex} | Inbox count count {_inboxState.InboxItems.Count}");
             
+            var child = _children[childInstanceIndex];
+
+            bool isCurrentlySelected = (_inboxState.SelectedItem != null
+                                        && _inboxState.SelectedItem.InstanceId == child.GetInstanceID());
+            if (isCurrentlySelected)
+            {
+                _inboxState.SelectedItem = null;
+            }
+            
+            _children.RemoveAt(childInstanceIndex);
+            GameObject.Destroy(child.gameObject);
             _inboxState.RemoveInboxItem(childInstanceIndex, emailInstanceData.CountAsFinishedItem);
         }
 
-        private void SetSelected() 
+        private void SetSelectedInboxItem() 
         {
             bool anySelected = false;
             
@@ -154,10 +155,9 @@ namespace EmailInbox
                 
                 var child = _children[i];
                 
-                var isCurrentlySelected = (_inboxState.SelectedItem.HasValue &&
-                                           _inboxState.SelectedItem.Value.InstanceId ==
-                                           child.gameObject.GetInstanceID());
-                child.IsSelected = isCurrentlySelected;
+                var isCurrentlySelected = (_inboxState.SelectedItem != null &&
+                                           _inboxState.SelectedItem.InstanceId ==
+                                           child.GetInstanceID());
                 child.IsSelected = isCurrentlySelected;
                 if (isCurrentlySelected)
                 {
