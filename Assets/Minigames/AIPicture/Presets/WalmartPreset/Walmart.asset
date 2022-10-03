@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
+  m_Name: Walmart
+  m_EditorClassIdentifier: 
+  Prompt: Identify the Penguin
+  CorrectImage: {fileID: 21300000, guid: 807c094d089f268488fc0f759994f1e4, type: 3}
+  WrongImages:
+  - {fileID: 21300000, guid: 9874839c5a8c39d449c56ce7bcfc06ca, type: 3}
+  - {fileID: 21300000, guid: 77087c5ebcd03fe4780d566d45ecf989, type: 3}

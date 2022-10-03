@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
+  m_Name: DiscoveringTheToaster
+  m_EditorClassIdentifier: 
+  Prompt: Identify the Discovery of the Toaster
+  CorrectImage: {fileID: 21300000, guid: b5d07aa1597da1e4496cc20f901d4787, type: 3}
+  WrongImages:
+  - {fileID: 21300000, guid: 2d559e9c0fdbd874895b6a851b67ec40, type: 3}
+  - {fileID: 21300000, guid: e6ee9ef2ad6121343ab8e71843189160, type: 3}

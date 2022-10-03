@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
+  m_Name: BowlMonkey
+  m_EditorClassIdentifier: 
+  Prompt: Identify the Bowl Monkey
+  CorrectImage: {fileID: 21300000, guid: 3fafa7ab3bafd914d8e2c25cccb3e95e, type: 3}
+  WrongImages:
+  - {fileID: 21300000, guid: 08b9f9888de363640a8b38eb4edc2d8a, type: 3}
+  - {fileID: 21300000, guid: e6ee9ef2ad6121343ab8e71843189160, type: 3}

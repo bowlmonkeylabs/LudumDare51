@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
+  m_Name: CatPlayingPoker
+  m_EditorClassIdentifier: 
+  Prompt: Identify the Cat Playing Poker
+  CorrectImage: {fileID: 21300000, guid: 150e5a8bed67c4949be1dc397f1b434e, type: 3}
+  WrongImages:
+  - {fileID: 21300000, guid: e886c5b72e658004da494011dd7ba697, type: 3}
+  - {fileID: 21300000, guid: c0dfc06b135bafb4392f9d054a8198d3, type: 3}

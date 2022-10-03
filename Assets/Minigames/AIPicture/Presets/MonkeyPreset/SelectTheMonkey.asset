@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c334c135e8a4a67a8a35c377cfd8460, type: 3}
   m_Name: SelectTheMonkey
   m_EditorClassIdentifier: 
-  Prompt: Check out this photo of this monkey skateboarding!
+  Prompt: Identify the Monkey Riding a Skateboard
   CorrectImage: {fileID: 21300000, guid: 682d6ea356af62041ba64d37b80e9d5d, type: 3}
   WrongImages:
   - {fileID: 21300000, guid: b527388a83065ad41bfc62823187f738, type: 3}
