@@ -319,6 +319,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2279465199626395448, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: df17f3e1977121648b7c43bfcb37d593, type: 2}
+    - target: {fileID: 2279465199626395448, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5053322126991074469, guid: df17f3e1977121648b7c43bfcb37d593, type: 2}
     - target: {fileID: 2279465200662862956, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_Name
       value: '[Minigame Structure]'
@@ -367,6 +375,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7280343157965541875, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: df17f3e1977121648b7c43bfcb37d593, type: 2}
+    - target: {fileID: 7280343157965541875, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5053322126991074469, guid: df17f3e1977121648b7c43bfcb37d593, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
 --- !u!114 &1137165471 stripped
