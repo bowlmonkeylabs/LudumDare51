@@ -42,6 +42,34 @@ MonoBehaviour:
     m_StrikethroughThickness: 0
     m_TabWidth: 0
   m_GlyphTable:
+  - m_Index: 1753
+    m_Metrics:
+      m_Width: 78.75
+      m_Height: 71.546875
+      m_HorizontalBearingX: 5.671875
+      m_HorizontalBearingY: 67.3125
+      m_HorizontalAdvance: 90
+    m_GlyphRect:
+      m_X: 109
+      m_Y: 66
+      m_Width: 80
+      m_Height: 73
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 1811
+    m_Metrics:
+      m_Width: 78.75
+      m_Height: 67.875
+      m_HorizontalBearingX: 5.671875
+      m_HorizontalBearingY: 65.4375
+      m_HorizontalAdvance: 90
+    m_GlyphRect:
+      m_X: 208
+      m_Y: 10
+      m_Width: 80
+      m_Height: 69
+    m_Scale: 1
+    m_AtlasIndex: 0
   - m_Index: 1812
     m_Metrics:
       m_Width: 78.75
@@ -70,34 +98,6 @@ MonoBehaviour:
       m_Height: 37
     m_Scale: 1
     m_AtlasIndex: 0
-  - m_Index: 1811
-    m_Metrics:
-      m_Width: 78.75
-      m_Height: 67.875
-      m_HorizontalBearingX: 5.671875
-      m_HorizontalBearingY: 65.4375
-      m_HorizontalAdvance: 90
-    m_GlyphRect:
-      m_X: 208
-      m_Y: 10
-      m_Width: 80
-      m_Height: 69
-    m_Scale: 1
-    m_AtlasIndex: 0
-  - m_Index: 1753
-    m_Metrics:
-      m_Width: 78.75
-      m_Height: 71.546875
-      m_HorizontalBearingX: 5.671875
-      m_HorizontalBearingY: 67.3125
-      m_HorizontalAdvance: 90
-    m_GlyphRect:
-      m_X: 109
-      m_Y: 66
-      m_Width: 80
-      m_Height: 73
-    m_Scale: 1
-    m_AtlasIndex: 0
   - m_Index: 2085
     m_Metrics:
       m_Width: 79.375
@@ -114,20 +114,20 @@ MonoBehaviour:
     m_AtlasIndex: 0
   m_CharacterTable:
   - m_ElementType: 1
-    m_Unicode: 61204
-    m_GlyphIndex: 1812
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 61407
-    m_GlyphIndex: 2014
+    m_Unicode: 61145
+    m_GlyphIndex: 1753
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 61203
     m_GlyphIndex: 1811
     m_Scale: 1
   - m_ElementType: 1
-    m_Unicode: 61145
-    m_GlyphIndex: 1753
+    m_Unicode: 61204
+    m_GlyphIndex: 1812
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 61407
+    m_GlyphIndex: 2014
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 61478
@@ -311,7 +311,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: icofont Atlas Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: UNDERLAY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -386,8 +386,8 @@ Material:
     - _TextureHeight: 1024
     - _TextureWidth: 1024
     - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
+    - _UnderlayOffsetX: 0.567
+    - _UnderlayOffsetY: -0.706
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
