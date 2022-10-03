@@ -89,7 +89,7 @@ namespace BML.Scripts.UI
         {
             if (_previousPage != null)
             {
-                _previousPage.ClosePage();
+                // _previousPage.ClosePage();
             }
             _root.SetActive(true);
             if (selectDefault)

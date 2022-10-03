@@ -4,6 +4,7 @@ using IKVM.Reflection;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace EmailInbox
@@ -49,7 +50,7 @@ namespace EmailInbox
             _textSubject.text = _emailData.Subject;
 
             var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
-            _button.image.color = color;
+            if (_button?.targetGraphic != null) _button.targetGraphic.color = color;
         }
 
         public void OpenEmail()
@@ -64,7 +65,7 @@ namespace EmailInbox
         
         public void UpdateColor() {
             var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
-            _button.image.color = color;
+            if (_button?.targetGraphic != null) _button.targetGraphic.color = color;
         }
         
         #endregion
