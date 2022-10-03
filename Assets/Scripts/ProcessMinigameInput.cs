@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BML.ScriptableObjectCore.Scripts.Events;
 using BML.ScriptableObjectCore.Scripts.SceneReferences;
 using BML.ScriptableObjectCore.Scripts.Variables;
@@ -156,6 +157,11 @@ namespace BML.Scripts
                 (minigameScreenToMouseDelta.x + realWidth/2f) / realWidth,
                 (minigameScreenToMouseDelta.y + realHeight/2f) / realHeight);
             
+            if (_minigameCamera.Value == null)
+            {
+                return null;
+            }
+
             ray = _minigameCamera.Value.ViewportPointToRay(new Vector3(minigameScreenCoord.x, minigameScreenCoord.y));
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null)
@@ -178,6 +184,17 @@ namespace BML.Scripts
             EventSystem.current.RaycastAll(pointerData, results);
 
             return results.Count < 1 ? new RaycastResult() : results[0];
+        }
+        
+        public static List<RaycastResult> UIRaycast (PointerEventData pointerData, LayerMask layerMask)
+        {
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            return results.Count < 1 
+                ? null
+                : results.Where(raycastResult => raycastResult.gameObject.IsInLayerMask(layerMask))
+                    .ToList();
         }
 
         public static PointerEventData ScreenPosToPointerData(Vector2 screenPos)
