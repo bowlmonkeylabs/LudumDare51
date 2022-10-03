@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item_Spam 10
+  m_Name: Email Item_Spam 100
   m_EditorClassIdentifier: 
-  FromAddress: oswald@importedpets.com
-  Subject: Claim your very own Giant African Land Snail!
-  Body: Hey, I'm Oswald, you strike me as a Giant African Land Snail-type-of-person,
-    so I'm sending you one free of charge! Just fill out this form with your credit
-    card information!
+  FromAddress: onionwarning@blog.co
+  Subject: ONIONS PLEASE READ!!!
+  Body: 'People are always worried about mayonnaise will spoil, but when food poisoning
+    is reported, the first thing officials look for is when the ''victim'' last ate
+    ONIONS and where those onions came from. Onions are a huge magnet for bacteria,
+    especially uncooked onions.
+
+    Please pass this on to all you love and care
+    about.'
   IsSpam: 1
   SpamPenalty: 0
   MinigameSceneName: 
