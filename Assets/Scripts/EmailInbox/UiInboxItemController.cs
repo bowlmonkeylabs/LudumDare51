@@ -2,9 +2,11 @@
 using BML.ScriptableObjectCore.Scripts.Events;
 using IKVM.Reflection;
 using Sirenix.OdinInspector;
+using ThisOtherThing.UI.Shapes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace EmailInbox
@@ -30,11 +32,12 @@ namespace EmailInbox
         [Required, SerializeField] private TMP_Text _textFromAddress;
         [Required, SerializeField] private TMP_Text _textSubject;
         [Required, SerializeField] private Button _button;
+        [Required, SerializeField] private Rectangle _selectedOverrideRectangle; 
 
         #endregion
 
         #region Unity lifecycle
-        
+
         #endregion
         
         #region Email data
@@ -50,14 +53,16 @@ namespace EmailInbox
             _textSubject.text = _emailData.Subject;
 
             var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
-            if (_button?.targetGraphic != null) _button.targetGraphic.color = color;
+            // if (_button?.targetGraphic != null) _button.targetGraphic.color = color;
+            _selectedOverrideRectangle.color = color;
+            _selectedOverrideRectangle.gameObject.SetActive(IsSelected);
         }
 
         public void OpenEmail()
         {
             var payload = new EmailInstancePayload
             {
-                InstanceId = this.gameObject.GetInstanceID(),
+                InstanceId = this.GetInstanceID(),
                 EmailData = _emailData,
             };
             _openEmail.Raise(payload);
@@ -65,7 +70,8 @@ namespace EmailInbox
         
         public void UpdateColor() {
             var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
-            if (_button?.targetGraphic != null) _button.targetGraphic.color = color;
+            _selectedOverrideRectangle.color = color;
+            _selectedOverrideRectangle.gameObject.SetActive(IsSelected);
         }
         
         #endregion
