@@ -16,6 +16,7 @@ namespace EmailInbox
         [SerializeField, ReadOnly] private EmailInstancePayload? _emailData;
         
         [SerializeField] private DynamicGameEvent _onOpenEmail;
+        [SerializeField] private UnityEvent _onOpenEmailCallback;
         [SerializeField] private DynamicGameEvent _onCloseEmail;
         [SerializeField] private UnityEvent _onCloseEmailCallback;
         
@@ -90,6 +91,7 @@ namespace EmailInbox
             _lastMinigameSuccess.Value = false;
             _emailData = emailInstanceData;
             
+            _onOpenEmailCallback?.Invoke();
             RenderEmailData();
         }
         
