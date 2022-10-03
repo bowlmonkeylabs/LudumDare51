@@ -467,6 +467,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2279465199335301336, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2279465199362814522, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -487,9 +491,17 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2279465200166008579, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_SortingOrder
+      value: 581
+      objectReference: {fileID: 0}
     - target: {fileID: 2279465200662862956, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_Name
       value: '[Minigame Structure]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279465200662862956, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2279465200662862957, guid: c40551baed6dc694986a49ee26be1d18, type: 3}
       propertyPath: m_RootOrder
@@ -1468,7 +1480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1837580305
 Camera:
   m_ObjectHideFlags: 0
