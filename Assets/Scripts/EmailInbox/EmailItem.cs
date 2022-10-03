@@ -13,6 +13,7 @@ namespace EmailInbox
         public string FromAddress;
         // public string ToAddress;
         public string Subject;
+        [TextArea]
         public string Body;
 
         public bool IsSpam;

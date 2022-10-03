@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 07
+  m_Name: Email Item_Spam 05
   m_EditorClassIdentifier: 
-  FromAddress: prince@nigerian.com
-  Subject: I am rich but need your help to reach the US
-  Body: 1,000,000 dollars is yours for just 100,000
+  FromAddress: inheritance@service.com
+  Subject: You just inherited a castle!
+  Body: Great news! Your great uncle Bonzivar XIV has left you a castle in his will!
+    Verify your credit card info to receive rights to this castle.
   IsSpam: 1
   SpamPenalty: 0
+  MinigameSceneName: 
   MinigameScene: {fileID: 0}

@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 12
+  m_Name: Email Item_Game 02
   m_EditorClassIdentifier: 
-  FromAddress: bigmoneyprizes@winerz.com
-  Subject: Won you has big prize!
-  Body: Great day! Our system has said you won prize very big! Below claim and credit
-    card info provide!
-  IsSpam: 1
+  FromAddress: clogged@toilet.com
+  Subject: Help! We're taking on water!
+  Body: Emergency!!!!
+  IsSpam: 0
   SpamPenalty: 0
-  MinigameSceneName: 
-  MinigameScene: {fileID: 0}
+  MinigameScene: {fileID: 102900000, guid: c6f0755d2e322bd468373ad20921216f, type: 3}

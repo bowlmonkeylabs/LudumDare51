@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 11
+  m_Name: Email Item_Spam 07
   m_EditorClassIdentifier: 
-  FromAddress: bankz@money.com
-  Subject: Password Reset for your Bank Account!
-  Body: Hello <insert name here>, we noticed you recently tried to reset your bank
-    account password. Click the link below and sign in to finish resetting.
+  FromAddress: bigmoneyprizes@winerz.com
+  Subject: Won you has big prize!
+  Body: Great day! Our system has said you won prize very big! Below claim and credit
+    card info provide!
   IsSpam: 1
   SpamPenalty: 0
   MinigameSceneName: 

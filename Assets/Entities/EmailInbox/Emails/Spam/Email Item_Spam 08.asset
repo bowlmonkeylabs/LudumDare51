@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 03
+  m_Name: Email Item_Spam 08
   m_EditorClassIdentifier: 
-  FromAddress: clogged@toilet.com
-  Subject: Help! We're taking on water!
-  Body: Emergency!!!!
-  IsSpam: 0
+  FromAddress: benbaths@freesauna.com
+  Subject: Your free sauna is ready for installtion!
+  Body: Congratulations, your free sauna installation is ready! Just provide your
+    home address below and we will arrange a visit. We prefer if you leave your keys
+    under your doormat.
+  IsSpam: 1
   SpamPenalty: 0
-  MinigameScene: {fileID: 102900000, guid: c6f0755d2e322bd468373ad20921216f, type: 3}
+  MinigameSceneName: 
+  MinigameScene: {fileID: 0}

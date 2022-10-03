@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 01
+  m_Name: Email Item_Game 05
   m_EditorClassIdentifier: 
-  FromAddress: johnson@bigdickpills.com
-  Subject: Work leave you feeling deflated?
-  Body: Try big dick pills today!
-  IsSpam: 1
+  FromAddress: blackthumb@helpme.or
+  Subject: Plants need water?!?
+  Body: Can someone please show me how on earth to water plants?
+  IsSpam: 0
   SpamPenalty: 0
-  MinigameScene: {fileID: 0}
+  MinigameScene: {fileID: 102900000, guid: f3c686cfd0c0ef346a36bf8f4bc2fd7b, type: 3}

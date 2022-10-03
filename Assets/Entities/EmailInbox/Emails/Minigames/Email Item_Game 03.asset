@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 14
+  m_Name: Email Item_Game 03
   m_EditorClassIdentifier: 
-  FromAddress: ted@taxrefunds.com
-  Subject: You qualify for a big tax break!
-  Body: The government has decided you should keep more of your money! Sign in with
-    your bank account below to get your tax break!
-  IsSpam: 1
+  FromAddress: ailab@research.com
+  Subject: AI Analysis Required!
+  Body: We need you help train our AI! Identify the correct image.
+  IsSpam: 0
   SpamPenalty: 0
-  MinigameSceneName: 
-  MinigameScene: {fileID: 0}
+  MinigameSceneName: AIPicture_Minigame
+  MinigameScene: {fileID: 102900000, guid: a8c21806bd6dee044849320fbf0bf4b2, type: 3}

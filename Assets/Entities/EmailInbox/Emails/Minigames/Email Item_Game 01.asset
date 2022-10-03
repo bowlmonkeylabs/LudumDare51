@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 13
+  m_Name: Email Item_Game 01
   m_EditorClassIdentifier: 
-  FromAddress: benbaths@freesauna.com
-  Subject: Your free sauna is ready for installtion!
-  Body: Congratulations, your free sauna installation is ready! Just provide your
-    home address below and we will arrange a visit. We prefer if you leave your keys
-    under your doormat.
-  IsSpam: 1
+  FromAddress: chefjohn@pizza.com
+  Subject: Pizza Needs Cooking!
+  Body: Help! I forgot how to make pizzas!
+  IsSpam: 0
   SpamPenalty: 0
-  MinigameSceneName: 
-  MinigameScene: {fileID: 0}
+  MinigameSceneName: Pizza_Minigame
+  MinigameScene: {fileID: 102900000, guid: 4ba43857c57c5bd47b3eeafb81169c04, type: 3}

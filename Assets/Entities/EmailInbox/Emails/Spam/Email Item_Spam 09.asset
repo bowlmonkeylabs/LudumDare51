@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 10
+  m_Name: Email Item_Spam 09
   m_EditorClassIdentifier: 
-  FromAddress: inheritance@service.com
-  Subject: You just inherited a castle!
-  Body: Great news! Your great uncle Bonzivar XIV has left you a castle in his will!
-    Verify your credit card info to receive rights to this castle.
+  FromAddress: ted@taxrefunds.com
+  Subject: You qualify for a big tax break!
+  Body: The government has decided you should keep more of your money! Sign in with
+    your bank account below to get your tax break!
   IsSpam: 1
   SpamPenalty: 0
   MinigameSceneName: 

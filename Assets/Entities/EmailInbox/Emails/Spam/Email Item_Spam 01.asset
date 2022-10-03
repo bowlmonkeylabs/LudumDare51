@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 15
+  m_Name: Email Item_Spam 01
   m_EditorClassIdentifier: 
-  FromAddress: oswald@importedpets.com
-  Subject: Claim your very own Giant African Land Snail!
-  Body: Hey, I'm Oswald, you take me as a Giant African Land Snail-type-of-person,
-    so I'm sending you one free of charge! Just fill out this form with your credit
-    card information!
+  FromAddress: johnson@bigdickpills.com
+  Subject: Does work leave you feeling deflated?
+  Body: Try big dick pills today!
   IsSpam: 1
   SpamPenalty: 0
   MinigameSceneName: 

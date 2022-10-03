@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 08
+  m_Name: Email Item_Game 04
   m_EditorClassIdentifier: 
-  FromAddress: security@google.biz
-  Subject: ALERT your account may have been compromised
-  Body: Click this shady link to check
-  IsSpam: 1
+  FromAddress: johsnon@dentist.com
+  Subject: Get those shiny bright whites!
+  Body: We got a patient coming in with questionable hygiene...clean those teeth!
+  IsSpam: 0
   SpamPenalty: 0
-  MinigameScene: {fileID: 0}
+  MinigameSceneName: BrushTeeth_Minigame
+  MinigameScene: {fileID: 102900000, guid: fb2d2dfc96f484e4e9a955950f0a4672, type: 3}

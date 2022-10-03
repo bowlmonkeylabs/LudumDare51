@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item 02
+  m_Name: Email Item_Spam 04
   m_EditorClassIdentifier: 
-  FromAddress: chefjohn@pizza.com
-  Subject: Pizza Needs Cooking!
-  Body: Help! I forgot how to make pizzas!
-  IsSpam: 0
+  FromAddress: site@generic.org
+  Subject: This deal is yours for only a LIMITED TIME
+  Body: You dont wanna miss this!
+  IsSpam: 1
   SpamPenalty: 0
-  MinigameSceneName: Pizza_Minigame
-  MinigameScene: {fileID: 102900000, guid: 4ba43857c57c5bd47b3eeafb81169c04, type: 3}
+  MinigameSceneName: 
+  MinigameScene: {fileID: 0}
