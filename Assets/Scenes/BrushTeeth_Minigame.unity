@@ -1630,7 +1630,7 @@ MonoBehaviour:
           TargetBPM: 120
         Owner: {fileID: 2138064124853556593}
         DebugActive: 0
-        PauseDuration: 3
+        PauseDuration: 2
         RandomizePauseDuration: 0
         MinPauseDuration: 1
         MaxPauseDuration: 3
@@ -1824,7 +1824,7 @@ MonoBehaviour:
           TargetBPM: 120
         Owner: {fileID: 2138064124857575739}
         DebugActive: 0
-        PauseDuration: 3
+        PauseDuration: 2
         RandomizePauseDuration: 0
         MinPauseDuration: 1
         MaxPauseDuration: 3
