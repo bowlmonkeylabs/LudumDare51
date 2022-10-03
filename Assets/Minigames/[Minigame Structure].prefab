@@ -365,8 +365,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Task Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64ce50bf080ccb043b9ce2de44d95f28, type: 2}
-  m_sharedMaterial: {fileID: 5053322126991074469, guid: 64ce50bf080ccb043b9ce2de44d95f28, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 93d0a5a3c9c374a499154518c48b5b21, type: 2}
+  m_sharedMaterial: {fileID: 5053322126991074469, guid: 93d0a5a3c9c374a499154518c48b5b21, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -883,8 +883,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64ce50bf080ccb043b9ce2de44d95f28, type: 2}
-  m_sharedMaterial: {fileID: 5053322126991074469, guid: 64ce50bf080ccb043b9ce2de44d95f28, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 93d0a5a3c9c374a499154518c48b5b21, type: 2}
+  m_sharedMaterial: {fileID: 5053322126991074469, guid: 93d0a5a3c9c374a499154518c48b5b21, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
