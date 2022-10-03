@@ -23,6 +23,8 @@ MonoBehaviour:
       - f77ebb67-8f0e-4a8e-a27f-1a8e072fde22
       - 0ff7b1cd-9074-44ac-acdd-9baec8dbfef1
       - fd12a671-a97f-40ce-8bf1-e900d8649383
+      - 9df564f7-9d43-4651-8453-a0843d5c7d17
+      - 5b05c0c1-f6b2-499a-8b49-1c81e1d4751e
       _values:
       - _id: dc0671f1-8a87-464b-9b71-15352f9c77f3
         _name:
@@ -31,7 +33,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.16470589, g: 0.6, b: 0.5254902, a: 1}
       - _id: fda3ed78-1e7a-4d9e-9987-74fec525fb0c
         _name:
           _value: UI_Normal
@@ -39,7 +41,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+          - _value: {r: 0.19607843, g: 0.7137255, b: 0.62352943, a: 1}
       - _id: b6359dee-92d3-410c-8942-5f063321d68d
         _name:
           _value: UI_Pressed
@@ -47,7 +49,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+          - _value: {r: 0.70980394, g: 1, b: 0.972549, a: 1}
       - _id: 7e847a8f-34c6-4070-bd56-d0b9c71c94a6
         _name:
           _value: UI_Selected
@@ -55,7 +57,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.49803922, g: 0.78039217, b: 0.7529412, a: 1}
       - _id: 7c2804b6-21d9-4eb4-a255-8acd4d6d852e
         _name:
           _value: UI_Disabled
@@ -63,7 +65,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.5, g: 0.5, b: 0.5, a: 0.5019608}
       - _id: f77ebb67-8f0e-4a8e-a27f-1a8e072fde22
         _name:
           _value: UI_Text_Fill
@@ -71,7 +73,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 0.95, g: 0.95, b: 0.95, a: 1}
       - _id: 0ff7b1cd-9074-44ac-acdd-9baec8dbfef1
         _name:
           _value: UI_Button_Fill
@@ -79,7 +81,7 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 0, g: 0, b: 0, a: 1}
+          - _value: {r: 1, g: 1, b: 1, a: 1}
       - _id: fd12a671-a97f-40ce-8bf1-e900d8649383
         _name:
           _value: UI_Button_Outline
@@ -87,7 +89,23 @@ MonoBehaviour:
           _keys:
           - d03a838d-31b9-443f-8065-c76f2ba90373
           _values:
-          - _value: {r: 1, g: 1, b: 1, a: 1}
+          - _value: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
+      - _id: 9df564f7-9d43-4651-8453-a0843d5c7d17
+        _name:
+          _value: UI_Panel_Fill
+        _values:
+          _keys:
+          - d03a838d-31b9-443f-8065-c76f2ba90373
+          _values:
+          - _value: {r: 0.11372549, g: 0.41960785, b: 0.36862746, a: 1}
+      - _id: 5b05c0c1-f6b2-499a-8b49-1c81e1d4751e
+        _name:
+          _value: UI_Panel_Outline
+        _values:
+          _keys:
+          - d03a838d-31b9-443f-8065-c76f2ba90373
+          _values:
+          - _value: {r: 0.19607843, g: 0.7137255, b: 0.62352943, a: 1}
     _themes:
       _keys:
       - d03a838d-31b9-443f-8065-c76f2ba90373
@@ -105,6 +123,8 @@ MonoBehaviour:
       - f77ebb67-8f0e-4a8e-a27f-1a8e072fde22
       - 0ff7b1cd-9074-44ac-acdd-9baec8dbfef1
       - fd12a671-a97f-40ce-8bf1-e900d8649383
+      - 9df564f7-9d43-4651-8453-a0843d5c7d17
+      - 5b05c0c1-f6b2-499a-8b49-1c81e1d4751e
     _themeOrders:
       _ids:
       - d03a838d-31b9-443f-8065-c76f2ba90373
