@@ -6133,7 +6133,7 @@ MonoBehaviour:
   _cursorRoot: {fileID: 288087747}
   _cursorDefaultImage: {fileID: 1712815719}
   _cursorInteractableImage: {fileID: 547335135}
-  _cursorTextureHotspot: {x: 0, y: 0}
+  _cursorTextureHotspot: {x: 112, y: 42}
   _cursorDefault: {fileID: 2800000, guid: 92effcd88f0e0b247a1bb13eb05d5ce3, type: 3}
   _cursorInteractable: {fileID: 2800000, guid: dc0cdc9ee82e0e14f8b8111ae6a06171, type: 3}
   _interactableLayerMask:
