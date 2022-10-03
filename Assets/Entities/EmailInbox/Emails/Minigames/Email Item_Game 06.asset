@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6140cd5d3c0444b971b51eab45ad852, type: 3}
-  m_Name: Email Item_Game 05
+  m_Name: Email Item_Game 06
   m_EditorClassIdentifier: 
-  FromAddress: blackthumb@helpme.org
-  Subject: Plants need water?!?
-  Body: Can someone please show me how on earth to water plants?
+  FromAddress: santonis@pizzaplace.org
+  Subject: It's not DiGiorno, it's your job!
+  Body: Get pizza making stat! We've got orders flying in!
   IsSpam: 0
   SpamPenalty: 0
-  MinigameSceneName: Gardening_Minigame
-  MinigameScene: {fileID: 102900000, guid: f3c686cfd0c0ef346a36bf8f4bc2fd7b, type: 3}
+  MinigameSceneName: Pizza_Minigame
+  MinigameScene: {fileID: 102900000, guid: 4ba43857c57c5bd47b3eeafb81169c04, type: 3}
