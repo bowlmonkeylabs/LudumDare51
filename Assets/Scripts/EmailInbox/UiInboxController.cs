@@ -140,12 +140,15 @@ namespace EmailInbox
                 return;
             }
             
-            Debug.Log($"Removing email ({emailInstanceData.EmailInstance.EmailData.Subject}) {emailInstanceData.EmailInstance.InstanceId} | Index {childInstanceIndex} | Child count {_children.Count}");
+            Debug.Log($"Removing email ({emailInstanceData.EmailInstance.EmailData.Subject}) {emailInstanceData.EmailInstance.InstanceId} | Index {childInstanceIndex} | Inbox count count {_inboxState.InboxItems.Count}");
             
             _inboxState.RemoveInboxItem(childInstanceIndex, emailInstanceData.CountAsFinishedItem);
         }
 
-        private void SetSelected() {
+        private void SetSelected() 
+        {
+            bool anySelected = false;
+            
             for (int i = 0; i < _children.Count; i++)
             {
                 
@@ -155,8 +158,20 @@ namespace EmailInbox
                                            _inboxState.SelectedItem.Value.InstanceId ==
                                            child.gameObject.GetInstanceID());
                 child.IsSelected = isCurrentlySelected;
+                child.IsSelected = isCurrentlySelected;
+                if (isCurrentlySelected)
+                {
+                    anySelected = true;
+                    _eventSystem.SetSelectedGameObject(child.gameObject);
+                }
                 child.UpdateColor();
             }
+            
+            if (!anySelected)
+            {
+                _eventSystem.SetSelectedGameObject(null);
+            }
+            
         }
     }
 }
