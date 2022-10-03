@@ -7,6 +7,7 @@ using BML.Scripts.Utils;
 using Sirenix.OdinInspector;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -22,6 +23,9 @@ namespace BML.Scripts
         [SerializeField] private Vector3Variable _mouseWorldPosInMinigame;
         [SerializeField] private GameEvent _onCancelDrag;
         [SerializeField] private BoolVariable _isPaused;
+
+        [SerializeField] private UnityEvent _onStartDrag;
+        [SerializeField] private UnityEvent _onEndDrag;
         private bool IsMinigameRunning => _minigameCamera.Value != null;
         
         private bool _dragging;
@@ -92,12 +96,13 @@ namespace BML.Scripts
                 Draggable draggable = hitObj.GetComponent<Draggable>();
                 if(draggable != null) {
                     draggable.StartDrag();
+                    _onStartDrag.Invoke();
                 }
                 
             }
             if(_dragging && context.canceled) {
                 _dragging = false;
-                
+                _onEndDrag.Invoke();
                 _onCancelDrag.Raise();
             }
         }
