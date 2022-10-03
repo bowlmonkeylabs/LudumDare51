@@ -105,6 +105,7 @@ namespace EmailInbox
             var payload = currentValue as RemoveEmailInstancePayload?;
             if (payload == null) return;
 
+            Debug.Log($"Removing email ({payload.Value.EmailInstance.EmailData.Subject}) {payload.Value.EmailInstance.InstanceId}");
             RemoveEmail(payload.Value);
         }
 
@@ -123,6 +124,8 @@ namespace EmailInbox
                 Debug.Log($"EmailInboxState RemoveInboxItem {emailInstanceData.EmailInstance.InstanceId} No index found");
                 return;
             }
+            
+            Debug.Log($"Removing email ({emailInstanceData.EmailInstance.EmailData.Subject}) {emailInstanceData.EmailInstance.InstanceId} | Index {childInstanceIndex} | Child count {_children.Count}");
             
             _inboxState.RemoveInboxItem(childInstanceIndex, emailInstanceData.CountAsFinishedItem);
         }

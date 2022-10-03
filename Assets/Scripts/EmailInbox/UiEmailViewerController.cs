@@ -101,6 +101,7 @@ namespace EmailInbox
                     EmailInstance = _emailData.Value,
                     CountAsFinishedItem = countAsFinishedItem,
                 };
+                Debug.Log($"Requesting to close email ({_emailData.Value.EmailData.Subject}) {_emailData.Value.InstanceId}");
                 _onCloseEmail.Raise(payload);
             }
             
