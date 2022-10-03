@@ -5,6 +5,7 @@ using BML.ScriptableObjectCore.Scripts.Events;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace EmailInbox
 {
@@ -18,6 +19,8 @@ namespace EmailInbox
 
         [Required, SerializeField] private DynamicGameEvent _onOpenEmail;
         [Required, SerializeField] private DynamicGameEvent _onCloseEmail;
+
+        [Required, SerializeField] private EventSystem _eventSystem;
 
         [ShowInInspector, ReadOnly] private List<UiInboxItemController> _children = new List<UiInboxItemController>();
 
@@ -69,6 +72,7 @@ namespace EmailInbox
                 throw new Exception($"Not enough list items to render all emails. Please add more.");
             }
 
+            bool anySelected = false;
             for (int i = 0; i < _children.Count; i++)
             {
                 
@@ -82,6 +86,16 @@ namespace EmailInbox
                                            _inboxState.SelectedItem.Value.InstanceId ==
                                            child.gameObject.GetInstanceID());
                 child.IsSelected = isCurrentlySelected;
+                if (isCurrentlySelected)
+                {
+                    anySelected = true;
+                    _eventSystem.SetSelectedGameObject(child.gameObject);
+                }
+            }
+
+            if (!anySelected)
+            {
+                _eventSystem.SetSelectedGameObject(null);
             }
         }
         

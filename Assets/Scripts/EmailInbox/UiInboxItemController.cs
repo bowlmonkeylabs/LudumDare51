@@ -61,7 +61,7 @@ namespace EmailInbox
             };
             _openEmail.Raise(payload);
         }
-
+        
         public void UpdateColor() {
             var color = (IsSelected ? _button.colors.selectedColor : _button.colors.normalColor);
             _button.image.color = color;
