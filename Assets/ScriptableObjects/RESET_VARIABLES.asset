@@ -19,7 +19,12 @@ MonoBehaviour:
   BoolVariables:
   - {fileID: 11400000, guid: 3975cff0b522fb945a1344e66029a983, type: 2}
   - {fileID: 11400000, guid: 06b8515a9a4d1574a9dc6d9954e552de, type: 2}
-  IntVariables: []
+  IntVariables:
+  - {fileID: 11400000, guid: 231ccec715ada774da18c0e4dc8c1f67, type: 2}
+  - {fileID: 11400000, guid: 963470bf86b86d740972dfd03c0c56a6, type: 2}
+  - {fileID: 11400000, guid: 306a78a7273d2284e93550ed26daefe8, type: 2}
+  - {fileID: 11400000, guid: 712a133c169f8f647985b4745674e8e1, type: 2}
+  - {fileID: 11400000, guid: 7af9c558c0c163847a6923c1e199f8d2, type: 2}
   FloatVariables: []
   Vector2Variables: []
   Vector3Variables: []
